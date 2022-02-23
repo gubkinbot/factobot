@@ -15,22 +15,45 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  
+  test:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        a: [0] # strange error if deleted matrix
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      # - name: Test test command.
+      #   run: echo "Test test done."
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Run tests
+        run: python3 ./src/test.py
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    env:
+      CI: true # show terminal output!
+      
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+
+      # - name: Test deploy command.
+      #   run: echo "Test deploy done."
+      
+      - name: Deploying...
+        uses: appleboy/ssh-action@master
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: |
+            cd /root/gubkinbot/factobot
+            git pull
+            pm2 reload all
+          # python3 ./src/run.py
