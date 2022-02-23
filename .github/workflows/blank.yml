@@ -55,5 +55,5 @@ jobs:
           script: |
             cd /root/gubkinbot/factobot
             git pull
-            pm2 reload 1
+            pm2 reload all
           # python3 ./src/run.py
