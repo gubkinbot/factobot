@@ -3,7 +3,7 @@ This is a echo bot.
 It echoes any incoming text messages.
 """
 
-# test 1
+# test 12
 
 import logging
 
