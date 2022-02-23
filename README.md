@@ -2,7 +2,5 @@
 Unforgettable DS
 
 
-factobot.tech
-
-[пример](http://example.com/ "Необязательная подсказка")
+[factobot.tech](https://factobot.tech/ "Незабываемый DS")
 
