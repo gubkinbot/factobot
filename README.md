@@ -2,7 +2,7 @@
 Unforgettable DS
 
 
-**Сайт: **
+<strong> Сайт: </strong>
 
 [factobot.tech](https://factobot.tech/ "Сайт незабываемого DS")
 
