@@ -3,8 +3,6 @@ This is a echo bot.
 It echoes any incoming text messages.
 """
 
-# test 12
-
 import logging
 
 from aiogram import Bot, Dispatcher, executor, types
