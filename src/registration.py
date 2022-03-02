@@ -1,15 +1,25 @@
+import random
+
+consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
+vowels = ['a', 'e', 'y', 'u', 'i', 'o']
+elements = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
+            'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
+def get_login():
+  return (random.choice(consonants) + 
+            random.choice(vowels) + 
+            random.choice(consonants) + 
+            random.choice(vowels) + 
+            random.choice(consonants) + 
+            random.choice(vowels) + 
+            random.choice(consonants))
+  
+def get_password():
+  return ''.join([random.choice(elements) for i in range(8)])
+
 def start(user_id):
-  return '''
-<b>bold</b>, <strong>bold</strong>
-<i>italic</i>, <em>italic</em>
-<u>underline</u>, <ins>underline</ins>
-<s>strikethrough</s>, <strike>strikethrough</strike>, <del>strikethrough</del>
-<span class="tg-spoiler">spoiler</span>, <tg-spoiler>spoiler</tg-spoiler>
-<b>bold <i>italic bold <s>italic bold strikethrough <span class="tg-spoiler">italic bold strikethrough spoiler</span></s> <u>underline italic bold</u></i> bold</b>
-<a href="http://www.example.com/">inline URL</a>
-<a href="tg://user?id=123456789">inline mention of a user</a>
-<code>inline fixed-width code</code>
-<pre>pre-formatted fixed-width code block</pre>
-<pre><code class="language-python">[i for i in range(10)]</code></pre>
-  '''
-#   return f'<code>inline fixed-width code</code>! Your ID {user_id}'
+  return f'''<b>Welcome!</b>
+
+Your login: <pre>{get_login()}</pre>
+Your password: <pre>{get_password()}</pre>'''
