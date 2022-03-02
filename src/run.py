@@ -21,7 +21,7 @@ async def send_welcome(message: types.Message):
 async def send_welcome(message: types.Message):
     await message.reply('Можно будет добавить факт из бота')
     
-@dp.message_handler(commands=['setting'])
+@dp.message_handler(commands=['settings'])
 async def send_welcome(message: types.Message):
     await message.reply('Настройки бота')
 
