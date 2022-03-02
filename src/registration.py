@@ -10,6 +10,6 @@ def start(user_id):
 <a href="tg://user?id=123456789">inline mention of a user</a>
 <code>inline fixed-width code</code>
 <pre>pre-formatted fixed-width code block</pre>
-<pre><code class="language-python">pre-formatted fixed-width code block written in the Python programming language</code></pre>
+<pre><code class="language-python">[i for i in range(10)]</code></pre>
   '''
 #   return f'<code>inline fixed-width code</code>! Your ID {user_id}'
