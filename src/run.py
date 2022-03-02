@@ -1,5 +1,6 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
+import registration
 
 
 API_TOKEN = '118050171:AAGApBKKMUHXwOGJ2H7k0YZ715c75dPU0MQ'
@@ -11,7 +12,7 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply('Добро пожаловать в @factobot')
+    await message.reply(registration.hello())
     
 @dp.message_handler(commands=['read'])
 async def send_welcome(message: types.Message):
