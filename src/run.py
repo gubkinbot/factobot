@@ -28,8 +28,7 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    await for i in range(10):
-        message.answer(f'"{message.text}" не является служебной командой. User_id: {message.chat.id}')
+    await [message.answer(f'"{message.text}" не является служебной командой. User_id: {message.chat.id}') for i in range(10)]
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
