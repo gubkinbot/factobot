@@ -12,7 +12,7 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply(registration.start())
+    await message.reply(registration.start(message.chat.id))
     
 @dp.message_handler(commands=['read'])
 async def send_welcome(message: types.Message):
