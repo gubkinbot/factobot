@@ -1,5 +1,11 @@
 import random
 import mysql.connector
+from dotenv import load_dotenv
+load_dotenv('.env')
+FACT_DB_NAME = os.environ.get('FACT_DB_NAME')
+FACT_DB_USER = os.environ.get('FACT_DB_USER')
+FACT_DB_PASSWORD = os.environ.get('FACT_DB_PASSWORD')
+
 
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
@@ -23,4 +29,5 @@ def start(user_id):
   return f'''<b>Welcome!</b>
 
 Your login: <pre>{get_login()}</pre>
-Your password: <pre>{get_password()}</pre>'''
+Your password: <pre>{get_password()}</pre>
+{FACT_DB_NAME}'''
