@@ -2,6 +2,7 @@ import random
 import mysql.connector
 import os
 from dotenv import load_dotenv
+
 load_dotenv('./.env')
 FACT_DB_NAME = os.environ.get('FACT_DB_NAME')
 FACT_DB_USER = os.environ.get('FACT_DB_USER')
