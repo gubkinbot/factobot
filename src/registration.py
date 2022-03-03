@@ -2,9 +2,9 @@ import random
 import mysql.connector
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv('./.data.env')
 
-TOKEN_FACTOBOT = os.getenv('TOKEN_FACTOBOT')
+FACT_DB_NAME = os.getenv('FACT_DB_NAME')
 
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
@@ -29,4 +29,4 @@ def start(user_id):
 
 Your login: <pre>{get_login()}</pre>
 Your password: <pre>{get_password()}</pre>
-{TOKEN_FACTOBOT}'''
+{FACT_DB_NAME}'''
