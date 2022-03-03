@@ -29,4 +29,4 @@ def start(user_id):
 
 Your login: <pre>{get_login()}</pre>
 Your password: <pre>{get_password()}</pre>
-{TOKEN}'''
+{TOKEN_FACTOBOT}'''
