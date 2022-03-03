@@ -2,7 +2,7 @@ import random
 import mysql.connector
 import os
 from dotenv import load_dotenv
-load_dotenv('./.data.env')
+load_dotenv('./data.env')
 
 FACT_DB_NAME = os.getenv('FACT_DB_NAME')
 
