@@ -2,9 +2,9 @@ import random
 import mysql.connector
 import os
 from dotenv import load_dotenv
+load_dotenv('./.env')
 
-load_dotenv('.env')
-TOKEN = os.environ.get('TOKEN')
+TOKEN_FACTOBOT = os.environ.get('TOKEN_FACTOBOT')
 
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
@@ -20,7 +20,7 @@ def get_login():
             random.choice(consonants) + 
             random.choice(vowels) + 
             random.choice(consonants))
-  
+
 def get_password():
   return ''.join([random.choice(elements) for i in range(8)])
 
