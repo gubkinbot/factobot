@@ -25,6 +25,7 @@ def get_password():
   return ''.join([random.choice(elements) for i in range(8)])
 
 def start(user_id):
+  load_dotenv('./data.env')
   return f'''<b>Welcome!</b>
 
 Your login: <pre>{get_login()}</pre>
