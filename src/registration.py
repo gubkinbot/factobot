@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv('./.env')
 
+
 TOKEN_FACTOBOT = os.environ.get('TOKEN_FACTOBOT')
 
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
