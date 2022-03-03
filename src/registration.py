@@ -1,4 +1,5 @@
 import random
+import mysql.connector
 
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
