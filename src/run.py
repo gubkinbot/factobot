@@ -17,7 +17,7 @@ dp = Dispatcher(bot)
 async def send_welcome(message: types.Message):
     await message.reply(registration.start(message.chat.id), parse_mode='html')
     
-@dp.message_handler(commands=['read'])
+@dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
     await message.reply(data['DB_USERNAME'])
     
