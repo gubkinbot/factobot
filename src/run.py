@@ -17,7 +17,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['read'])
 async def send_welcome(message: types.Message):
-    await message.reply('Бот отправит запись из базы данных' + data['DB_USERNAME])
+    await message.reply('Бот отправит запись из базы данных' + data['DB_USERNAME'])
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
