@@ -2,8 +2,11 @@ import logging
 from aiogram import Bot, Dispatcher, executor, types
 import registration
 import yaml
+from os import path as os_path
 
-data = yaml.safe_load(open('config.yml'))
+
+config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
+data = yaml.safe_load(open(config_path))
 API_TOKEN = '118050171:AAGApBKKMUHXwOGJ2H7k0YZ715c75dPU0MQ'
 
 logging.basicConfig(level=logging.INFO)
