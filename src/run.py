@@ -1,8 +1,9 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 import registration
+import yaml
 
-
+data = yaml.safe_load(open('config.yml'))
 API_TOKEN = '118050171:AAGApBKKMUHXwOGJ2H7k0YZ715c75dPU0MQ'
 
 logging.basicConfig(level=logging.INFO)
@@ -16,7 +17,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['read'])
 async def send_welcome(message: types.Message):
-    await message.reply('Бот отправит запись из базы данных')
+    await message.reply('Бот отправит запись из базы данных' + data['DB_USERNAME])
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
