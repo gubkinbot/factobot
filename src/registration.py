@@ -32,13 +32,16 @@ def get_password():
     return ''.join([random.choice(elements) for i in range(8)])
 
 def start(user_id):
+    new_login = get_login()
+    new_password = get_password()
     mycursor = mydb.cursor()
     sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
-    val = (user_id, 'samorukov', 'qwerty')
+    val = (user_id, new_login, new_password)
     mycursor.execute(sql, val)
     mydb.commit()
     print(mycursor.rowcount, "record inserted.")
+    
     return f'''<b>Welcome!</b>
-Your login: <pre>{get_login()}</pre>
-Your password: <pre>{get_password()}</pre>
+Your login: <pre>{new_login}</pre>
+Your password: <pre>{new_password}</pre>
 {mycursor.rowcount} record inserted.'''
