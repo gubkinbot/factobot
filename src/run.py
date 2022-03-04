@@ -23,7 +23,7 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     answer_data = query.data
     # always answer callback queries, even if you have nothing to say
     await query.answer("Let's Rock!")
-    await query.message.edit_text(text=facts.get_fact(), reply_markup=inline_fact_button)
+    await query.message.edit_text(text=facts.get_fact(), reply_markup=inline_fact_button, parse_mode='html')
 #     await bot.send_message(query.from_user.id, facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
 #     await bot.edit_message_text(chat_id=message.chat.id, message_id=message.message_id, text="тру-ту-ту", reply_markup=key )
 
