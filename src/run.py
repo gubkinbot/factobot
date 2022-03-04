@@ -12,7 +12,7 @@ config = yaml.safe_load(open(config_path))
 good_button = types.InlineKeyboardButton('👍', callback_data='good')
 next_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
 bad_button = types.InlineKeyboardButton('👎', callback_data='bad')
-inline_fact_button = types.InlineKeyboardMarkup().row(good_button, next_button, bad_button)
+inline_fact_button = types.InlineKeyboardMarkup().row(bad_button, next_button, good_button)
 inline_fact_button_next = types.InlineKeyboardMarkup().add(next_button)
 
 logging.basicConfig(level=logging.INFO)
