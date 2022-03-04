@@ -5,11 +5,11 @@ import yaml
 from os import path as os_path
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
-data = yaml.safe_load(open(config_path))
+config = yaml.safe_load(open(config_path))
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=data['TOKEN'])
+bot = Bot(token=config['TOKEN'])
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
