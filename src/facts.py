@@ -21,7 +21,5 @@ def get_fact():
   
   note = myresult[2]
   code = myresult[3]
-  message = f'<i>{note}</i>
-  
-  <code>{code}</code>'
+  message = f'<i>{note}</i>\n\n<code>{code}</code>'
   return message
