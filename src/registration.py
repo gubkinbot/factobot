@@ -43,6 +43,7 @@ def start(user_id):
     
     new_login = get_login()
     new_password = get_password()
+    mycursor.close()
     mycursor = mydb.cursor()
     sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
     val = (user_id, new_login, new_password)
