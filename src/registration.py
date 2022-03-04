@@ -43,7 +43,6 @@ def start(user_id):
     
     if myresult >= 1:
         mycursor.close()
-        mydb.close()
         return 'Вы уже авторизованы'
     
     mycursor.close()
@@ -55,7 +54,6 @@ def start(user_id):
     mycursor.execute(sql, val)
     mydb.commit()
     mycursor.close()
-    mydb.close()
     print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Welcome!</b>
