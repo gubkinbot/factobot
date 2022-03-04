@@ -18,4 +18,9 @@ def get_fact():
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
-  return str(myresult)
+  
+  note = myresult[2]
+  code = myresult[3]
+  message = f'<i>{note}</i>
+<code>{code}</code>'
+  return message
