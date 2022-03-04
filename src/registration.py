@@ -34,7 +34,7 @@ def get_password():
 def start(user_id):
     mycursor = mydb.cursor()
     sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
-    val = ('123456', 'samorukov', 'qwerty')
+    val = (user_id, 'samorukov', 'qwerty')
     mycursor.execute(sql, val)
     mydb.commit()
     print(mycursor.rowcount, "record inserted.")
