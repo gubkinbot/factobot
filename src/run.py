@@ -18,10 +18,20 @@ dp = Dispatcher(bot)
 
 
 
-@dp.callback_query_handler(func=lambda c: c.data == 'next')
-async def process_callback_button(callback_query: types.CallbackQuery):
-    await bot.answer_callback_query(callback_query.id)
-    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
+@dp.callback_query_handler(text='next')
+async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
+    answer_data = query.data
+    # always answer callback queries, even if you have nothing to say
+    await query.answer(f'You answered with {answer_data!r}')
+
+    if answer_data == 'next':
+        text = 'Great, me too!'
+    elif answer_data == 'no':
+        text = 'Oh no...Why so?'
+    else:
+        text = f'Unexpected callback data {answer_data!r}!'
+
+    await bot.send_message(query.from_user.id, text)
 
 
 @dp.message_handler(commands=['start'])
