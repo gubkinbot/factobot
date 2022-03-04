@@ -13,6 +13,10 @@ mydb = mysql.connector.connect(
     database=data['DB_NAME']
 )
 
+
+
+
+
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
 elements = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
@@ -32,6 +36,11 @@ def get_password():
     return ''.join([random.choice(elements) for i in range(8)])
 
 def start(user_id):
+    
+    mycursor = mydb.cursor()
+    mycursor.execute(f'SELECT * FROM users WHERE user_id = {user_id}')
+    myresult = mycursor.rowcount
+    
     new_login = get_login()
     new_password = get_password()
     mycursor = mydb.cursor()
@@ -44,4 +53,4 @@ def start(user_id):
     return f'''<b>Welcome!</b>
 Your login: <pre>{new_login}</pre>
 Your password: <pre>{new_password}</pre>
-{mycursor.rowcount} record inserted.'''
+{myresult} record inserted.'''
