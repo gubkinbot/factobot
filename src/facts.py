@@ -12,8 +12,9 @@ def get_fact():
     user=data['DB_USERNAME'],
     password=data['DB_PASSWORD'],
     database=data['DB_NAME'])
+
   mycursor = mydb.cursor(buffered=True)
-  mycursor.execute("SELECT * FROM facts")
+  mycursor.execute("SELECT * FROM facts ORDER BY RAND() LIMIT 1")
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
