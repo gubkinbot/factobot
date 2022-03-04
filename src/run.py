@@ -23,8 +23,7 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     answer_data = query.data
     # always answer callback queries, even if you have nothing to say
     await query.answer(f'You answered with {answer_data!r}')
-    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
-
+    await bot.send_message(query.from_user.id, facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
