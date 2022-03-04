@@ -16,6 +16,14 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=config['TOKEN'])
 dp = Dispatcher(bot)
 
+
+
+@dp.callback_query_handler(func=lambda c: c.data == 'next')
+async def process_callback_button(callback_query: types.CallbackQuery):
+    await bot.answer_callback_query(callback_query.id)
+    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
+
+
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     await message.reply(registration.start(message.chat.id), parse_mode='html')
