@@ -13,7 +13,7 @@ def get_fact():
     password=data['DB_PASSWORD'],
     database=data['DB_NAME'])
   mycursor = mydb.cursor(buffered=True)
-  mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
+  mycursor.execute("SELECT * FROM facts")
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
