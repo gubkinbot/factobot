@@ -24,13 +24,13 @@ dp = Dispatcher(bot)
 
 @dp.callback_query_handler(text='next')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-#     await query.answer("Let's Rock!")
+    await query.answer("Let's Rock!")
     await query.message.edit_text(text=facts.get_fact(), reply_markup=inline_fact_button, parse_mode='html')
     
 @dp.callback_query_handler(text='good')
 @dp.callback_query_handler(text='bad')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-#     await query.answer("Спасибо, учтём!")
+    await query.answer("Спасибо, учтём!")
     await query.message.edit_reply_markup(reply_markup=inline_fact_button_next)
 
 @dp.message_handler(commands=['start'])
