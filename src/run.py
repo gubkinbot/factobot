@@ -6,11 +6,10 @@ from os import path as os_path
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 data = yaml.safe_load(open(config_path))
-API_TOKEN = '118050171:AAGApBKKMUHXwOGJ2H7k0YZ715c75dPU0MQ'
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=data['TOKEN'])
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
