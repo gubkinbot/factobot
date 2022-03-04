@@ -1,6 +1,7 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 import registration
+import facts
 import yaml
 from os import path as os_path
 
@@ -18,7 +19,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
-    await message.reply(data['DB_USERNAME'])
+    await message.reply(facts.get_fact(), parse_mode='html')
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
