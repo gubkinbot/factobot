@@ -37,14 +37,14 @@ def get_password():
 
 def start(user_id):
     
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(buffered=True)
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     
     new_login = get_login()
     new_password = get_password()
     mycursor.close()
-    mycursor = mydb.cursor()
+    mycursor = mydb.cursor(buffered=True)
     sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
     val = (user_id, new_login, new_password)
     mycursor.execute(sql, val)
