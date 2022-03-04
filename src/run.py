@@ -8,8 +8,11 @@ from os import path as os_path
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
 
-fact_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
-inline_fact_button = types.InlineKeyboardMarkup().add(fact_button)
+
+good_button = types.InlineKeyboardButton('👍', callback_data='good')
+next_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
+bad_button = types.InlineKeyboardButton('👎', callback_data='bad')
+inline_fact_button = types.InlineKeyboardMarkup().add(good_button, fact_button, bad_button)
 
 logging.basicConfig(level=logging.INFO)
 
