@@ -22,7 +22,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
-    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=kb.inline_fact_button)
+    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
