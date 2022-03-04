@@ -4,7 +4,6 @@ import registration
 import yaml
 from os import path as os_path
 
-
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 data = yaml.safe_load(open(config_path))
 API_TOKEN = '118050171:AAGApBKKMUHXwOGJ2H7k0YZ715c75dPU0MQ'
@@ -20,7 +19,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['read'])
 async def send_welcome(message: types.Message):
-    await message.reply('Бот отправит запись из базы данных')
+    await message.reply(data['DB_USERNAME'])
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
