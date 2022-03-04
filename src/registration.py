@@ -40,18 +40,21 @@ def start(user_id):
     mycursor = mydb.cursor(buffered=True)
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
+    mycursor.close()
+    mydb.close()
     
     if myresult >= 1:
         return 'Вы уже авторизованы'
     
     new_login = get_login()
     new_password = get_password()
-    mycursor.close()
     mycursor = mydb.cursor(buffered=True)
     sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
     val = (user_id, new_login, new_password)
     mycursor.execute(sql, val)
     mydb.commit()
+    mycursor.close()
+    mydb.close()
     print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Welcome!</b>
