@@ -6,17 +6,6 @@ from os import path as os_path
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 data = yaml.safe_load(open(config_path))
 
-mydb = mysql.connector.connect(
-    host=data['DB_HOST'],
-    user=data['DB_USERNAME'],
-    password=data['DB_PASSWORD'],
-    database=data['DB_NAME']
-)
-
-
-
-
-
 consonants = ['q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 vowels = ['a', 'e', 'y', 'u', 'i', 'o']
 elements = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
