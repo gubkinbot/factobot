@@ -36,16 +36,20 @@ def get_password():
     return ''.join([random.choice(elements) for i in range(8)])
 
 def start(user_id):
-    
+    mydb = mysql.connector.connect(
+        host=data['DB_HOST'],
+        user=data['DB_USERNAME'],
+        password=data['DB_PASSWORD'],
+        database=data['DB_NAME'])
     mycursor = mydb.cursor(buffered=True)
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     
     if myresult >= 1:
         mycursor.close()
+        mydb.close()
         return 'Вы уже авторизованы'
     
-    mycursor.close()
     new_login = get_login()
     new_password = get_password()
     mycursor = mydb.cursor(buffered=True)
@@ -54,6 +58,7 @@ def start(user_id):
     mycursor.execute(sql, val)
     mydb.commit()
     mycursor.close()
+    mydb.close()
     print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Welcome!</b>
