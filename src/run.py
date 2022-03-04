@@ -8,6 +8,9 @@ from os import path as os_path
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
 
+fact_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
+inline_fact_button = types.InlineKeyboardMarkup().add(fact_button)
+
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=config['TOKEN'])
@@ -19,7 +22,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
-    await message.reply(facts.get_fact(), parse_mode='html')
+    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=kb.inline_fact_button)
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
