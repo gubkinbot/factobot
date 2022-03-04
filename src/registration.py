@@ -38,7 +38,7 @@ def get_password():
 def start(user_id):
     
     mycursor = mydb.cursor()
-    mycursor.execute(f'SELECT * FROM users WHERE user_id = {user_id}')
+    mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     
     new_login = get_login()
