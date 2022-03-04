@@ -13,6 +13,7 @@ good_button = types.InlineKeyboardButton('👍', callback_data='good')
 next_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
 bad_button = types.InlineKeyboardButton('👎', callback_data='bad')
 inline_fact_button = types.InlineKeyboardMarkup().row(good_button, next_button, bad_button)
+inline_fact_button_next = types.InlineKeyboardMarkup().add(next_button)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -29,7 +30,8 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
 @dp.callback_query_handler(text='good')
 @dp.callback_query_handler(text='bad')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-    await query.answer("Спасибо, учтём!")    
+    await query.answer("Спасибо, учтём!")
+    await query.message.edit_reply_markup(reply_markup=inline_fact_button_next)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
