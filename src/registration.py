@@ -41,6 +41,9 @@ def start(user_id):
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     
+    if myresult >= 1:
+        return 'Вы уже авторизованы'
+    
     new_login = get_login()
     new_password = get_password()
     mycursor.close()
