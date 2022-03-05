@@ -20,7 +20,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
-    bot.reply_to(message, 'Настройки!')
+    bot.reply_to(message, 'Пока без рассылок =(')
 
 @bot.message_handler(commands='fact')
 def send_welcome(message):
