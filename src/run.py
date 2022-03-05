@@ -23,7 +23,8 @@ def send_welcome(message):
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
-    bot.reply_to(message, 'Пока без рассылок =(', reply_markup=settings_markup, parse_mode='html')
+    bot.reply_to(message, 'Для управления ежедневными рассылками и доступом к общему пулу заметок нажмите на соответствующую кнопку:',
+                 reply_markup=settings_markup, parse_mode='html')
 
 @bot.message_handler(commands='fact')
 def send_welcome(message):
