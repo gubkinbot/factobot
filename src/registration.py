@@ -38,10 +38,13 @@ def start(user_id):
     if myresult >= 1:
         mycursor.close()
         mydb.close()
-        return f'''Вы уже авторизованы!
+        return f'''@factobot поможет держать в памяти важную информацию в области Data Science и Python!
 
+Вы можете добавить собственные важные заметки через форму на сайте factobot.tech, используя следующие учетные данные:
 Идентификатор: <pre>{myresult_data[2]}</pre>
-Пароль: <pre>{myresult_data[3]}</pre>'''
+Пароль: <pre>{myresult_data[3]}</pre>
+
+Подробнее про @factobot - factobot.tech/about'''
     
     new_login = get_login()
     new_password = get_password()
