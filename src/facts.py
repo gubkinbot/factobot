@@ -6,12 +6,6 @@ from os import path as os_path
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 data = yaml.safe_load(open(config_path))
 
-def get_fact(old_fact):
-  new_fact = extract_fact()
-  return str(len(old_fact)) + str(len(new_fact))
-#   return '!!!!!!!'
-#   return '>>' + new_fact + '<<' + '>>' + old_fact + '<<'
-
 def extract_fact():  
   mydb = mysql.connector.connect(
   host=data['DB_HOST'],
