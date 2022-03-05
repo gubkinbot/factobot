@@ -31,7 +31,12 @@ def send_welcome(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    bot.answer_callback_query(call.id, "Едем дальше...")
-    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(), reply_markup=fact_markup, parse_mode='html')
-
+    if call.data == 'next':
+        bot.answer_callback_query(call.id, "Едем дальше...")
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(), reply_markup=fact_markup, parse_mode='html')
+    elif call.data == 'privacy':
+        bot.answer_callback_query(call.id, "Приватность в разработке")
+    elif call.data == 'alarm':
+        bot.answer_callback_query(call.id, "Рассылки в разработке")
+        
 bot.infinity_polling()
