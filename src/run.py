@@ -16,7 +16,7 @@ markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
 
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
-    bot.reply_to(message, registration.start())
+    bot.reply_to(message, registration.start(message.chat.id))
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
