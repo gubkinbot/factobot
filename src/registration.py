@@ -40,11 +40,14 @@ def start(user_id):
         mydb.close()
         return f'''@factobot поможет держать в памяти важную информацию в области Data Science и Python!
 
-Вы можете добавить собственные важные заметки через форму на сайте factobot.tech, используя следующие учетные данные:
+Используйте команду /fact для получения заметок, /settings для управления рассылкой.
+
+Вы также можете добавить собственные заметки через форму на сайте factobot.tech, используя личные учетные данные:
 Идентификатор: <pre>{myresult_data[2]}</pre>
 Пароль: <pre>{myresult_data[3]}</pre>
 
-Подробнее — factobot.tech/about'''
+Подробнее — factobot.tech/about
+Поддержка — @samorukov'''
     
     new_login = get_login()
     new_password = get_password()
@@ -61,8 +64,11 @@ def start(user_id):
     
 @factobot поможет держать в памяти важную информацию в области Data Science и Python!
 
-Вы можете добавить собственные важные заметки через форму на сайте factobot.tech, используя следующие учетные данные:
+Используйте команду /fact для получения заметок, /settings для управления рассылкой.
+
+Вы также можете добавить собственные заметки через форму на сайте factobot.tech, используя личные учетные данные:
 Идентификатор: <pre>{new_login}</pre>
 Пароль: <pre>{new_password}</pre>
 
-Подробнее — factobot.tech/about'''
+Подробнее — factobot.tech/about
+Поддержка — @samorukov'''
