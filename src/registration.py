@@ -33,7 +33,7 @@ def start(user_id):
     mycursor = mydb.cursor(buffered=True)
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
-    myresult_data = mycursor.fetchone
+    myresult_data = mycursor.fetchone()
     
     if myresult >= 1:
         mycursor.close()
