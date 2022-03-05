@@ -38,7 +38,10 @@ def start(user_id):
     if myresult >= 1:
         mycursor.close()
         mydb.close()
-        return 'Вы уже авторизованы' + str(myresult_data)
+        return f'''Вы уже авторизованы!
+
+Идентификатор: <pre>{myresult_data[2]}</pre>
+Пароль: <pre>{myresult_data[3]}</pre>'''
     
     new_login = get_login()
     new_password = get_password()
@@ -51,7 +54,7 @@ def start(user_id):
     mydb.close()
     print(mycursor.rowcount, "record inserted.")
     
-    return f'''<b>Welcome!</b>
-Your login: <pre>{new_login}</pre>
-Your password: <pre>{new_password}</pre>
-{myresult} record inserted.'''
+    return f'''<b>Добро пожаловать!</b>
+
+Идентификатор: <pre>{new_login}</pre>
+Пароль: <pre>{new_password}</pre>'''
