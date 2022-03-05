@@ -31,7 +31,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
-    mydb = await aiomysql.connect(host=data['DB_HOST'], user=data['DB_USERNAME'], password=data['DB_PASSWORD'], db=data['DB_NAME'])
+    mydb = await aiomysql.connect(host=config['DB_HOST'], user=config['DB_USERNAME'], password=config['DB_PASSWORD'], db=config['DB_NAME'])
     await message.reply('csdcsdcsdcsdc', parse_mode='html', reply_markup=inline_fact_button)
     
 @dp.message_handler(commands=['write'])
