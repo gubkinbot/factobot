@@ -11,8 +11,11 @@ config = yaml.safe_load(open(config_path))
 
 bot = telebot.TeleBot(config['TOKEN'])
 
-markup = InlineKeyboardMarkup()
-markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
+fact_markup = InlineKeyboardMarkup()
+fact_markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
+
+settings_markup = InlineKeyboardMarkup(row_width=1)
+settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
 
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
@@ -20,15 +23,15 @@ def send_welcome(message):
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
-    bot.reply_to(message, 'Пока без рассылок =(')
+    bot.reply_to(message, 'Пока без рассылок =(', reply_markup=settings_markup, parse_mode='html')
 
 @bot.message_handler(commands='fact')
 def send_welcome(message):
-    bot.send_message(message.chat.id, facts.extract_fact(), reply_markup=markup, parse_mode='html')
+    bot.send_message(message.chat.id, facts.extract_fact(), reply_markup=fact_markup, parse_mode='html')
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
     bot.answer_callback_query(call.id, "Едем дальше...")
-    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(), reply_markup=markup, parse_mode='html')
+    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(), reply_markup=fact_markup, parse_mode='html')
 
 bot.infinity_polling()
