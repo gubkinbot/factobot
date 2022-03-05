@@ -23,7 +23,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands='fact')
 def send_welcome(message):
-    bot.send_message(message.chat.id, facts.extract_fact(), reply_markup=markup)
+    bot.send_message(message.chat.id, facts.extract_fact(), reply_markup=markup, parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
