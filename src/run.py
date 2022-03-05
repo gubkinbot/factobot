@@ -25,7 +25,7 @@ dp = Dispatcher(bot)
 @dp.callback_query_handler(text='next')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     await query.answer("Let's Rock!")
-    await query.message.edit_text(text=facts.get_fact(), reply_markup=inline_fact_button, parse_mode='html')
+    await query.message.edit_text(text=facts.get_fact(query.message.text), reply_markup=inline_fact_button, parse_mode='html')
     
 @dp.callback_query_handler(text='good')
 @dp.callback_query_handler(text='bad')
@@ -39,7 +39,7 @@ async def send_welcome(message: types.Message):
     
 @dp.message_handler(commands=['fact'])
 async def send_welcome(message: types.Message):
-    await message.reply(facts.get_fact(), parse_mode='html', reply_markup=inline_fact_button)
+    await message.reply(facts.extract_fact(), parse_mode='html', reply_markup=inline_fact_button)
     
 @dp.message_handler(commands=['write'])
 async def send_welcome(message: types.Message):
