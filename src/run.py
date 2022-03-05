@@ -1,50 +1,32 @@
-import logging
-from aiogram import Bot, Dispatcher, executor, types
-import registration
-import facts
+
 import yaml
 from os import path as os_path
-import aiomysql
+import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
 
+bot = telebot.TeleBot(config['TOKEN'])
 
-next_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
-inline_fact_button = types.InlineKeyboardMarkup().row(next_button)
+markup = InlineKeyboardMarkup()
+markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
 
-logging.basicConfig(level=logging.INFO)
+@bot.message_handler(commands=['start', 'info'])
+def send_welcome(message):
+    bot.reply_to(message, 'привет!')
 
-bot = Bot(token=config['TOKEN'])
-dp = Dispatcher(bot)
+@bot.message_handler(commands='settings')
+def send_welcome(message):
+    bot.reply_to(message, 'Настройки!')
 
+@bot.message_handler(commands='fact')
+def send_welcome(message):
+    bot.send_message(message.chat.id, "Факт!", reply_markup=markup)
 
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    bot.answer_callback_query(call.id, "Едем дальше...")
+    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='fdjghjghjfghjfgh', reply_markup=markup)
 
-@dp.callback_query_handler(text='next')
-async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-    await query.answer()
-    await query.message.edit_text(text=f'csdcsdcsacdsdcasdc', reply_markup=inline_fact_button, parse_mode='html')
-
-@dp.message_handler(commands=['start'])
-async def send_welcome(message: types.Message):
-    await message.reply(registration.start(message.chat.id), parse_mode='html')
-    
-@dp.message_handler(commands=['fact'])
-async def send_welcome(message: types.Message):
-    mydb = await aiomysql.connect(host=config['DB_HOST'], user=config['DB_USERNAME'], password=config['DB_PASSWORD'], db=config['DB_NAME'])
-    await message.reply('csdcsdcsdcsdc', parse_mode='html', reply_markup=inline_fact_button)
-    
-@dp.message_handler(commands=['write'])
-async def send_welcome(message: types.Message):
-    await message.reply('Можно будет добавить факт из бота')
-    
-@dp.message_handler(commands=['settings'])
-async def send_welcome(message: types.Message):
-    await message.reply('Настройки бота')
-
-@dp.message_handler()
-async def echo(message: types.Message):
-    await message.answer(f'"{message.text}" не является служебной командой. User_id: {message.chat.id}')
-
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+bot.infinity_polling()
