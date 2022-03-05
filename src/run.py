@@ -9,11 +9,8 @@ config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.ym
 config = yaml.safe_load(open(config_path))
 
 
-good_button = types.InlineKeyboardButton('👍', callback_data='good')
 next_button = types.InlineKeyboardButton('Ещё!', callback_data='next')
-bad_button = types.InlineKeyboardButton('👎', callback_data='bad')
-inline_fact_button = types.InlineKeyboardMarkup().row(bad_button, next_button, good_button)
-inline_fact_button_next = types.InlineKeyboardMarkup().add(next_button)
+inline_fact_button = types.InlineKeyboardMarkup().row(next_button)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,7 +21,7 @@ dp = Dispatcher(bot)
 
 @dp.callback_query_handler(text='next')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-    await query.answer("Let's Rock!")
+    await query.answer()
     await query.message.edit_text(text=facts.get_fact(query.message.text), reply_markup=inline_fact_button, parse_mode='html')
     
 @dp.callback_query_handler(text='good')
