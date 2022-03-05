@@ -44,7 +44,7 @@ def start(user_id):
 Идентификатор: <pre>{myresult_data[2]}</pre>
 Пароль: <pre>{myresult_data[3]}</pre>
 
-Подробнее про @factobot - factobot.tech/about'''
+Подробнее — factobot.tech/about'''
     
     new_login = get_login()
     new_password = get_password()
@@ -58,6 +58,11 @@ def start(user_id):
     print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Добро пожаловать!</b>
+    
+@factobot поможет держать в памяти важную информацию в области Data Science и Python!
 
+Вы можете добавить собственные важные заметки через форму на сайте factobot.tech, используя следующие учетные данные:
 Идентификатор: <pre>{new_login}</pre>
-Пароль: <pre>{new_password}</pre>'''
+Пароль: <pre>{new_password}</pre>
+
+Подробнее — factobot.tech/about'''
