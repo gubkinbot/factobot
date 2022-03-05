@@ -8,7 +8,8 @@ data = yaml.safe_load(open(config_path))
 
 def get_fact(old_fact):
   new_fact = extract_fact()
-  return '!!!!!!!'
+  return str(len(old_fact)) + str(len(new_fact))
+#   return '!!!!!!!'
 #   return '>>' + new_fact + '<<' + '>>' + old_fact + '<<'
 
 def extract_fact():  
