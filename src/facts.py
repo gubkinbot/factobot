@@ -18,8 +18,9 @@ def extract_fact():
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
-  
+  title = myresult[5]
+  link = myresult[6]
   note = myresult[2]
   code = myresult[3]
-  message = f'<i>{note}</i>\n\n<code>{code}</code>' + str(myresult)
+  message = f'<b>{title}</b>\n\n<pre language="python">{code}</pre>\n\n<i>{note}</i>\n\n<a href="{link}">inline URL</a>'
   return message
