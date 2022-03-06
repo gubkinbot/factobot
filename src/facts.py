@@ -22,5 +22,5 @@ def extract_fact():
   link = myresult[6]
   note = myresult[2]
   code = myresult[3]
-  message = f'<b>{title}</b>\n\n<pre language="python">{code}</pre>\n\n<i>{note}</i>\n\n<a href="{link}">inline URL</a>'
+  message = f'<b>{title}</b>\n\n<pre><code class="language-python">{code}</code></pre>\n\n<i>{note}</i>\n\n<a href="{link}">Источник</a>'
   return message
