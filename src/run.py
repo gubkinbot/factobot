@@ -23,7 +23,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
-    bot.reply_to(message, 'Для управления ежедневными рассылками и доступом к общему пулу заметок нажмите на соответствующую кнопку:',
+    bot.reply_to(message, 'Управление приватностью и рассылкой:',
                  reply_markup=settings_markup, parse_mode='html')
 
 @bot.message_handler(commands='fact')
@@ -38,6 +38,6 @@ def callback_query(call):
     elif call.data == 'privacy':
         bot.answer_callback_query(call.id, "Приватность в разработке")
     elif call.data == 'alarm':
-        bot.answer_callback_query(call.id, "Рассылки в разработке")
+        bot.answer_callback_query(call.id, "Рассылка в разработке")
         
 bot.infinity_polling()
