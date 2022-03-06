@@ -53,7 +53,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
-            cd /root/gubkinbot/factobot
+            cd /root/factobot
             git pull
             pm2 reload all
           # python3 ./src/run.py
