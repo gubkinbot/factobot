@@ -18,9 +18,20 @@ def extract_fact():
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
-  title = myresult[5]
-  link = myresult[6]
-  note = myresult[2]
-  code = myresult[3]
-  message = f'<b>{title}</b>\n\n<pre><code class="language-python">{code}</code></pre>\n\n<i>{note}</i>\n\n<a href="{link}">Источник</a>'
+#   title = myresult[5]
+#   link = myresult[6]
+#   note = myresult[2]
+#   code = myresult[3]
+  
+  title, link, note, code = '', '', '', ''
+  if len(myresult[5]) > 0:
+    title = f'<b>{myresult[5]}</b>\n\n'
+  if len(myresult[6]) > 0:
+    link = f'<a href="{myresult[6]}">Источник</a>'
+  if len(myresult[2]) > 0:
+    note = f'<i>{myresult[2]}</i>\n\n'
+  if len(myresult[3]) > 0:
+    code = f'<pre><code class="language-python">{myresult[3]}</code></pre>\n\n'
+  message = f'{title}{code}{note}{link}'
+#   message = f'<b>{title}</b>\n\n<pre><code class="language-python">{code}</code></pre>\n\n<i>{note}</i>\n\n<a href="{link}">Источник</a>'
   return message
