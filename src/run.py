@@ -28,7 +28,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands='fact')
 def send_welcome(message):
-    bot.send_message(message.chat.id, facts.extract_fact(), reply_markup=fact_markup, parse_mode='html', disable_web_page_preview=True)
+    bot.send_message(message.chat.id, facts.extract_fact(message.chat.id), reply_markup=fact_markup, parse_mode='html', disable_web_page_preview=True)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
