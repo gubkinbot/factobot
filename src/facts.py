@@ -6,7 +6,7 @@ from os import path as os_path
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 data = yaml.safe_load(open(config_path))
 
-def extract_fact():  
+def extract_fact(user_id):  
   mydb = mysql.connector.connect(
   host=data['DB_HOST'],
   user=data['DB_USERNAME'],
@@ -14,7 +14,7 @@ def extract_fact():
   database=data['DB_NAME'])
 
   mycursor = mydb.cursor(buffered=True)
-  mycursor.execute("SELECT * FROM facts ORDER BY RAND() LIMIT 1")
+  mycursor.execute(f"SELECT * FROM facts ORDER BY RAND() LIMIT 1 WHERE 'user_id' = '{user_id}'")
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
