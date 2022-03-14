@@ -34,7 +34,7 @@ def send_welcome(message):
 def callback_query(call):
     if call.data == 'next':
         bot.answer_callback_query(call.id, "Едем дальше...")
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(), reply_markup=fact_markup, disable_web_page_preview=True, parse_mode='html')
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(call.message.chat.id), reply_markup=fact_markup, disable_web_page_preview=True, parse_mode='html')
     elif call.data == 'privacy':
         bot.answer_callback_query(call.id, "Приватность в разработке")
     elif call.data == 'alarm':
