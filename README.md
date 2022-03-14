@@ -9,7 +9,7 @@
 <strong>Telegram бот: </strong> [factobot](https://t.me/factobot/ 'https://t.me/factobot/')
 
 <details> 
-  <summary>Сехам базы данных</summary>
+  <summary>Схема базы данных</summary>
   
-  ![""](db.png "scheme")
+  !["Схема базы данных"](db.png "scheme")
 </details>
