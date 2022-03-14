@@ -11,5 +11,5 @@
 <details> 
   <summary>Сехам базы данных</summary>
   
-  ![""](/.db.png "scheme")
+  ![""](db.png "scheme")
 </details>
