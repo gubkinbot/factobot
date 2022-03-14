@@ -14,7 +14,7 @@ def extract_fact(user_id):
   database=data['DB_NAME'])
 
   mycursor = mydb.cursor(buffered=True)
-  mycursor.execute(f"SELECT * FROM facts ORDER BY RAND() LIMIT 1 WHERE 'user_id' = '{user_id}'")
+  mycursor.execute(f"SELECT * FROM facts ORDER BY RAND() LIMIT 1 WHERE user_id = {user_id}")
   myresult = mycursor.fetchone()
   mycursor.close()
   mydb.close()
