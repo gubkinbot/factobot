@@ -59,22 +59,22 @@ def callback_query(call):
 def contact(message):
     if message.contact is not None: #Если присланный объект <strong>contact</strong> не равен нулю
         bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
-#        mydb = mysql.connector.connect(
-#            host=data['DB_HOST'],
-#            user=data['DB_USERNAME'],
-#            password=data['DB_PASSWORD'],
-#            database=data['DB_NAME'])
-#        mycursor = mydb.cursor(buffered=True)
-#        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number)[-11:]}")
-#        myresult = mycursor.rowcount
-#        myresult_data = mycursor.fetchone()
-#    
-#        if myresult >= 1:
-#            mycursor.close()
-#            mydb.close()
-#            bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
-#        else:
-#            bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
+        mydb = mysql.connector.connect(
+            host=data['DB_HOST'],
+            user=data['DB_USERNAME'],
+            password=data['DB_PASSWORD'],
+            database=data['DB_NAME'])
+        mycursor = mydb.cursor(buffered=True)
+        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number)[-11:]}")
+        myresult = mycursor.rowcount
+        myresult_data = mycursor.fetchone()
+    
+        if myresult >= 1:
+            mycursor.close()
+            mydb.close()
+            bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
+        else:
+            bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
         
         
         
