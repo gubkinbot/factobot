@@ -8,10 +8,10 @@ data = yaml.safe_load(open(config_path))
 
 def start(user_id):
     mydb = mysql.connector.connect(
-        host=data['CHGK_DB_HOST'],
-        user=data['CHGK_DB_USERNAME'],
-        password=data['CHGK_DB_PASSWORD'],
-        database=data['CHGK_DB_NAME'])
+        host=data['DB_HOST'],
+        user=data['DB_USERNAME'],
+        password=data['DB_PASSWORD'],
+        database=data['DB_NAME'])
     mycursor = mydb.cursor(buffered=True)
     mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
