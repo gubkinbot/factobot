@@ -24,6 +24,10 @@ def send_welcome(message):
     bot.send_message(message.chat.id, f'''<b>Добро пожаловать!</b>
     
 Для продолжения, пожалуйста, поделитесь своим номером телефона, нажав на кнопку в нижней части экрана
+
+<b>Welcome!</b>
+    
+To continue, please share your phone number by clicking on the button at the bottom of the screen
 ''', reply_markup=keyboard, parse_mode='html')
     
     
