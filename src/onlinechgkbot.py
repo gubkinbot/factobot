@@ -25,9 +25,9 @@ settings_markup.add(InlineKeyboardButton('Приватность', callback_data
 
 def send_welcome(message):
 
-    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
 
-    button_phone = types.KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
+    button_phone = telebot.types.KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
 
     keyboard.add(button_phone) #Добавляем эту кнопку
 
