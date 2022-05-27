@@ -3,7 +3,7 @@ from os import path as os_path
 import telebot
 import facts
 import start
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
@@ -17,26 +17,14 @@ settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
 
 @bot.message_handler(commands=['start', 'info'])
-# def send_welcome(message):
-#     bot.reply_to(message, start.start(message.chat.id), parse_mode='html')
-
-    
-
-
 def send_welcome(message):
-
-    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
-
-    button_phone = telebot.types.KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
-
+    keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
+    button_phone = KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
     keyboard.add(button_phone) #Добавляем эту кнопку
-
-    bot.send_message(message.chat.id, 'Номер телефона', reply_markup=keyboard) #Дублируем сообщением о том, что пользователь сейчас отправит боту свой номер телефона (на всякий случай, но это не обязательно)
-
+    bot.send_message(message.chat.id, f'''<b>Добро пожаловать!</b>
     
-    
-    
-    
+Для продолжения, пожалуйста, отправьте свой номер телефона или нажмите на кнопку в нижней части экрана
+''', reply_markup=keyboard)
     
     
 @bot.message_handler(commands='settings')
