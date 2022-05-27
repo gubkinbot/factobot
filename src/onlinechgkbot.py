@@ -3,7 +3,7 @@ from os import path as os_path
 import telebot
 import facts
 import start
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
@@ -50,9 +50,7 @@ def callback_query(call):
 @bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
 def contact(message):
     if message.contact is not None: #Если присланный объект <strong>contact</strong> не равен нулю
-        bot.send_message(message.chat.id, 'Понял, принял')
+        bot.send_message(message.chat.id, 'Понял, принял', reply_markup=ReplyKeyboardRemove())
         print(message.contact) #Выводим у себя в панели контактные данные. А вообщем можно их, например, сохранить или сделать что-то еще.
-
-
         
 bot.infinity_polling()
