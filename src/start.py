@@ -22,6 +22,7 @@ def start(user_id):
         mydb.close()
         return f'''Вы уже авторизованы в системе.'''
     
+    mycursor.close()
     mydb.close()
     
     return f'''<b>Добро пожаловать!</b>
