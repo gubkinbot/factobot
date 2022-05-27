@@ -6,6 +6,8 @@ import facts
 import registration
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+# test
+
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
 config = yaml.safe_load(open(config_path))
 
