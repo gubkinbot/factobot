@@ -18,7 +18,7 @@ settings_markup.add(InlineKeyboardButton('Приватность', callback_data
 
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
-    bot.reply_to(message, registration.start(message.chat.id), parse_mode='html')
+    bot.reply_to(message, start.start(message.chat.id), parse_mode='html')
 
 @bot.message_handler(commands='settings')
 def send_welcome(message):
