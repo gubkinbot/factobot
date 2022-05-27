@@ -57,7 +57,7 @@ def callback_query(call):
 
 @bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
 def contact(message):
-    if (message.contact is not None) and (message.contact.user_id == message.chat.id): #Если присланный объект <strong>contact</strong> не равен нулю
+    if message.contact.user_id == message.chat.id: #Если присланный объект <strong>contact</strong> не равен нулю
         bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
         mydb = mysql.connector.connect(
             host=data['DB_HOST'],
