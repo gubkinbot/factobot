@@ -20,18 +20,13 @@ def start(user_id):
     if myresult >= 1:
         mycursor.close()
         mydb.close()
-        return f'''@factobot поможет держать в памяти важную информацию из области Data Science и Python!
-Используй команду /fact для получения заметок, /settings для управления рассылкой.
-Ты также можешь добавить собственные заметки через форму на сайте factobot.tech, используя личные учетные данные:
-Идентификатор: <pre>{myresult_data[2]}</pre>
-Пароль: <pre>{myresult_data[3]}</pre>
-Подробнее — factobot.tech/about
-Поддержка — @samorukov'''
+        return f'''Вы уже авторизованы! Игра начнётся в 13:00 по московскому времени.'''
     
     mycursor.close()
     mydb.close()
     print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Добро пожаловать!</b>
-    
+
+Для продолжения, пожалуйста, отправьте свой номер телефона или нажмите на кнопку в нижней части экрана
 '''
