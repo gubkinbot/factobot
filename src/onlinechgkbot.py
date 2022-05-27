@@ -2,7 +2,7 @@ import yaml
 from os import path as os_path
 import telebot
 import facts
-import registration
+import start
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
