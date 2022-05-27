@@ -81,13 +81,19 @@ def contact(message):
             mydb.commit()
             mycursor.close()
             mydb.close()
-            bot.send_message(message.chat.id, f'Авторизация прошла успешно. До встречи на игре!', reply_markup=ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, '''Авторизация прошла успешно. До встречи на игре!
+
+Authorization was successful. See you at the game!''', reply_markup=ReplyKeyboardRemove())
         else:
             mycursor.close()
             mydb.close()
-            bot.send_message(message.chat.id, f'Вашего номера нет в базе данных. Пожалуйста, обратитесь к @samorukov')
+            bot.send_message(message.chat.id, '''Вашего номера нет в базе данных. Пожалуйста, обратитесь к @samorukov
+
+Your number is not in the database. Please contact @samorukov''')
     else:
-        bot.send_message(message.chat.id, 'Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram', reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.chat.id, '''Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram
+
+Please send your phone number which is linked to your Telegram account''', reply_markup=ReplyKeyboardRemove())
         
         
 bot.infinity_polling()
