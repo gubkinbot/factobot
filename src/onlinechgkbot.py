@@ -54,6 +54,6 @@ def callback_query(call):
 @bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
 def contact(message):
     if message.contact is not None: #Если присланный объект <strong>contact</strong> не равен нулю
-        bot.send_message(message.chat.id, f'Понял, принял: {message.contact.phone_number}', reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_numberst)[-11:]}', reply_markup=ReplyKeyboardRemove())
         
 bot.infinity_polling()
