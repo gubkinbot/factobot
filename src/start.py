@@ -13,7 +13,7 @@ def start(user_id):
         password=data['DB_PASSWORD'],
         database=data['DB_NAME'])
     mycursor = mydb.cursor(buffered=True)
-    mycursor.execute(f"SELECT * FROM 'TABLE 1' WHERE user_id = '{user_id}'")
+    mycursor.execute(f"SELECT * FROM 'TABLE 1' WHERE 1")
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     
