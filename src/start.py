@@ -28,13 +28,6 @@ def start(user_id):
 Подробнее — factobot.tech/about
 Поддержка — @samorukov'''
     
-    new_login = get_login()
-    new_password = get_password()
-    mycursor = mydb.cursor(buffered=True)
-    sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
-    val = (user_id, new_login, new_password)
-    mycursor.execute(sql, val)
-    mydb.commit()
     mycursor.close()
     mydb.close()
     print(mycursor.rowcount, "record inserted.")
