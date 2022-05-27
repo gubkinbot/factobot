@@ -12,7 +12,7 @@ config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.ym
 data = yaml.safe_load(open(config_path))
 
 
-bot = telebot.TeleBot(config['ONLINECHGKBOT'])
+bot = telebot.TeleBot(data['ONLINECHGKBOT'])
 
 fact_markup = InlineKeyboardMarkup()
 fact_markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
@@ -58,22 +58,23 @@ def callback_query(call):
 @bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
 def contact(message):
     if message.contact is not None: #Если присланный объект <strong>contact</strong> не равен нулю
-        mydb = mysql.connector.connect(
-            host=data['DB_HOST'],
-            user=data['DB_USERNAME'],
-            password=data['DB_PASSWORD'],
-            database=data['DB_NAME'])
-        mycursor = mydb.cursor(buffered=True)
-        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number)[-11:]}")
-        myresult = mycursor.rowcount
-        myresult_data = mycursor.fetchone()
-    
-        if myresult >= 1:
-            mycursor.close()
-            mydb.close()
-            bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
-        else:
-            bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
+        bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
+#        mydb = mysql.connector.connect(
+#            host=data['DB_HOST'],
+#            user=data['DB_USERNAME'],
+#            password=data['DB_PASSWORD'],
+#            database=data['DB_NAME'])
+#        mycursor = mydb.cursor(buffered=True)
+#        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number)[-11:]}")
+#        myresult = mycursor.rowcount
+#        myresult_data = mycursor.fetchone()
+#    
+#        if myresult >= 1:
+#            mycursor.close()
+#            mydb.close()
+#            bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
+#        else:
+#            bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
         
         
         
