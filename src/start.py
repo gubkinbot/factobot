@@ -13,20 +13,38 @@ def start(user_id):
         password=data['CHGK_DB_PASSWORD'],
         database=data['CHGK_DB_NAME'])
     mycursor = mydb.cursor(buffered=True)
-    mycursor.execute(f"SELECT * FROM 'TABLE 1' WHERE user_id = '{user_id}'")
+    mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     
     if myresult >= 1:
         mycursor.close()
         mydb.close()
-        return f'''Вы уже авторизованы в системе.'''
+        return f'''@factobot поможет держать в памяти важную информацию из области Data Science и Python!
+Используй команду /fact для получения заметок, /settings для управления рассылкой.
+Ты также можешь добавить собственные заметки через форму на сайте factobot.tech, используя личные учетные данные:
+Идентификатор: <pre>{myresult_data[2]}</pre>
+Пароль: <pre>{myresult_data[3]}</pre>
+Подробнее — factobot.tech/about
+Поддержка — @samorukov'''
     
+    new_login = get_login()
+    new_password = get_password()
+    mycursor = mydb.cursor(buffered=True)
+    sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
+    val = (user_id, new_login, new_password)
+    mycursor.execute(sql, val)
+    mydb.commit()
     mycursor.close()
     mydb.close()
+    print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Добро пожаловать!</b>
     
-Вы находитесь в боте для принятия ответов на вопросы IV игры Чемпионата "Что? Где? Когда?" среди организаций Группы "ЛУКОЙЛ".
-Для продолжения, пожалуйста, авторизуйтесь, отправив свой номер телефона, либо нажмите на кнопку в нижней части экрана.
+@factobot поможет держать в памяти важную информацию из области Data Science и Python!
+Используй команду /fact для получения заметок, /settings для управления рассылкой.
+Ты также можешь добавить собственные заметки через форму на сайте factobot.tech, используя личные учетные данные:
+Идентификатор: <pre>{new_login}</pre>
+Пароль: <pre>{new_password}</pre>
+Подробнее — factobot.tech/about
 Поддержка — @samorukov'''
