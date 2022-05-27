@@ -58,7 +58,6 @@ def callback_query(call):
 @bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
 def contact(message):
     if message.contact.user_id == message.chat.id: #Если присланный объект <strong>contact</strong> не равен нулю
-        bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
         mydb = mysql.connector.connect(
             host=data['DB_HOST'],
             user=data['DB_USERNAME'],
@@ -72,11 +71,11 @@ def contact(message):
         if myresult >= 1:
             mycursor.close()
             mydb.close()
-            bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
+            bot.send_message(message.chat.id, f'Авторизация прошла успешно. До встречи на игре!', reply_markup=ReplyKeyboardRemove())
         else:
-            bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
+            bot.send_message(message.chat.id, f'Вашего номера нет в базе данных. Пожалуйста, обратитесь к @samorukov')
     else:
-        bot.send_message(message.chat.id, 'ЧУЖОЙ НОМЕР!!!', reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.chat.id, 'Пожалуйста, отправьте свой номер телефона, который привязак к аккаунту Telegram', reply_markup=ReplyKeyboardRemove())
         
         
         
