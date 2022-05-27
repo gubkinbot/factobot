@@ -17,9 +17,28 @@ settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
 
 @bot.message_handler(commands=['start', 'info'])
-def send_welcome(message):
-    bot.reply_to(message, start.start(message.chat.id), parse_mode='html')
+# def send_welcome(message):
+#     bot.reply_to(message, start.start(message.chat.id), parse_mode='html')
 
+    
+
+
+def send_welcome(message):
+
+    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
+
+    button_phone = types.KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
+
+    keyboard.add(button_phone) #Добавляем эту кнопку
+
+    bot.send_message(message.chat.id, 'Номер телефона', reply_markup=keyboard) #Дублируем сообщением о том, что пользователь сейчас отправит боту свой номер телефона (на всякий случай, но это не обязательно)
+
+    
+    
+    
+    
+    
+    
 @bot.message_handler(commands='settings')
 def send_welcome(message):
     bot.reply_to(message, 'Управление приватностью и рассылкой:',
