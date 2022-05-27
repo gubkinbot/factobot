@@ -75,8 +75,8 @@ def contact(message):
             bot.send_message(message.chat.id, f'Понял, принял: {str(message.contact.phone_number)[-11:]}', reply_markup=ReplyKeyboardRemove())
         else:
             bot.send_message(message.chat.id, f'Нет такого: {str(message.contact.phone_number)[-11:]}')
-     else:
-        bot.send_message(message.chat.id, f'ЧУЖОЙ НОМЕР!!!', reply_markup=ReplyKeyboardRemove())
+    else:
+        bot.send_message(message.chat.id, 'ЧУЖОЙ НОМЕР!!!', reply_markup=ReplyKeyboardRemove())
         
         
         
