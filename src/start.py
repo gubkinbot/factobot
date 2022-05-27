@@ -8,12 +8,12 @@ data = yaml.safe_load(open(config_path))
 
 def start(user_id):
     mydb = mysql.connector.connect(
-        host=data['DB_HOST'],
-        user=data['DB_USERNAME'],
-        password=data['DB_PASSWORD'],
-        database=data['DB_NAME'])
+        host=data['CHGK_DB_HOST'],
+        user=data['CHGK_DB_USERNAME'],
+        password=data['CHGK_DB_PASSWORD'],
+        database=data['CHGK_DB_NAME'])
     mycursor = mydb.cursor(buffered=True)
-    mycursor.execute(f"SELECT * FROM users WHERE user_id = '{user_id}'")
+    mycursor.execute(f"SELECT * FROM 'TABLE 1' WHERE user_id = '{user_id}'")
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     
@@ -22,16 +22,7 @@ def start(user_id):
         mydb.close()
         return f'''Вы уже авторизованы в системе.'''
     
-    new_login = get_login()
-    new_password = get_password()
-    mycursor = mydb.cursor(buffered=True)
-    sql = "INSERT INTO users (user_id, username, password) VALUES (%s, %s, %s)"
-    val = (user_id, new_login, new_password)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    mycursor.close()
     mydb.close()
-    print(mycursor.rowcount, "record inserted.")
     
     return f'''<b>Добро пожаловать!</b>
     
