@@ -45,5 +45,14 @@ def callback_query(call):
         bot.answer_callback_query(call.id, "Приватность в разработке")
     elif call.data == 'alarm':
         bot.answer_callback_query(call.id, "Рассылка в разработке")
+
+
+@bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
+def contact(message):
+    if message.contact is not None: #Если присланный объект <strong>contact</strong> не равен нулю
+        bot.send_message(message.chat.id, 'Понял, принял')
+        print(message.contact) #Выводим у себя в панели контактные данные. А вообщем можно их, например, сохранить или сделать что-то еще.
+
+
         
 bot.infinity_polling()
