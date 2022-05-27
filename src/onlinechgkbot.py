@@ -70,13 +70,17 @@ def contact(message):
     
         if myresult >= 1:
             mycursor.close()
+            mycursor = mydb.cursor(buffered=True)
+            mycursor.execute(f"UPDATE `TABLE 1` SET `user_id`= {message.chat.id} WHERE phone = {str(message.contact.phone_number)[-11:]}")
+            mycursor.close()
             mydb.close()
             bot.send_message(message.chat.id, f'Авторизация прошла успешно. До встречи на игре!', reply_markup=ReplyKeyboardRemove())
         else:
+            mycursor.close()
+            mydb.close()
             bot.send_message(message.chat.id, f'Вашего номера нет в базе данных. Пожалуйста, обратитесь к @samorukov')
     else:
         bot.send_message(message.chat.id, 'Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram', reply_markup=ReplyKeyboardRemove())
-        
         
         
 bot.infinity_polling()
