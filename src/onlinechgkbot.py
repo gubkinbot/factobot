@@ -75,7 +75,7 @@ def contact(message):
         else:
             bot.send_message(message.chat.id, f'Вашего номера нет в базе данных. Пожалуйста, обратитесь к @samorukov')
     else:
-        bot.send_message(message.chat.id, 'Пожалуйста, отправьте свой номер телефона, который привязак к аккаунту Telegram', reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.chat.id, 'Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram', reply_markup=ReplyKeyboardRemove())
         
         
         
