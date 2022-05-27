@@ -5,9 +5,12 @@ import facts
 import start
 import mysql.connector
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+import yaml
+from os import path as os_path
 
 config_path = os_path.abspath(os_path.join(os_path.dirname(__file__), 'config.yml'))
-config = yaml.safe_load(open(config_path))
+data = yaml.safe_load(open(config_path))
+
 
 bot = telebot.TeleBot(config['ONLINECHGKBOT'])
 
@@ -61,7 +64,7 @@ def contact(message):
             password=data['DB_PASSWORD'],
             database=data['DB_NAME'])
         mycursor = mydb.cursor(buffered=True)
-        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number}")
+        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `phone` = {str(message.contact.phone_number)[-11:]}")
         myresult = mycursor.rowcount
         myresult_data = mycursor.fetchone()
     
