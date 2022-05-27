@@ -78,6 +78,7 @@ def contact(message):
                 database=data['DB_NAME'])
             mycursor = mydb.cursor(buffered=True)
             mycursor.execute(f"UPDATE `TABLE 1` SET `user_id`= {message.chat.id} WHERE phone = {str(message.contact.phone_number)[-11:]}")
+            mydb.commit()
             mycursor.close()
             mydb.close()
             bot.send_message(message.chat.id, f'Авторизация прошла успешно. До встречи на игре!', reply_markup=ReplyKeyboardRemove())
