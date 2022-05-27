@@ -19,7 +19,7 @@ settings_markup.add(InlineKeyboardButton('Приватность', callback_data
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
     keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
-    button_phone = KeyboardButton(text="Отправить телефон", request_contact=True) #Указываем название кнопки, которая появится у пользователя
+    button_phone = KeyboardButton(text="Поделиться \ Share", request_contact=True) #Указываем название кнопки, которая появится у пользователя
     keyboard.add(button_phone) #Добавляем эту кнопку
     bot.send_message(message.chat.id, f'''<b>Добро пожаловать!</b>
     
