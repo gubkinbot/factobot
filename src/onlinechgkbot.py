@@ -24,7 +24,7 @@ def send_welcome(message):
     bot.send_message(message.chat.id, f'''<b>Добро пожаловать!</b>
     
 Для продолжения, пожалуйста, отправьте свой номер телефона или нажмите на кнопку в нижней части экрана
-''', reply_markup=keyboard)
+''', reply_markup=keyboard, parse_mode='html')
     
     
 @bot.message_handler(commands='settings')
