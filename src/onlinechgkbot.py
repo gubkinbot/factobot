@@ -22,9 +22,9 @@ settings_markup.add(InlineKeyboardButton('Приватность', callback_data
 
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
-    keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) #Подключаем клавиатуру
-    button_phone = KeyboardButton(text="Поделиться \ Share", request_contact=True) #Указываем название кнопки, которая появится у пользователя
-    keyboard.add(button_phone) #Добавляем эту кнопку
+    keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    button_phone = KeyboardButton(text="Поделиться \ Share", request_contact=True)
+    keyboard.add(button_phone)
     bot.send_message(message.chat.id, f'''<b>Добро пожаловать!</b>
     
 Для продолжения, пожалуйста, поделитесь своим номером телефона, нажав на кнопку в нижней части экрана
@@ -33,31 +33,11 @@ def send_welcome(message):
     
 To continue, please share your phone number by clicking on the button at the bottom of the screen
 ''', reply_markup=keyboard, parse_mode='html')
-    
-    
-@bot.message_handler(commands='settings')
-def send_welcome(message):
-    bot.reply_to(message, 'Управление приватностью и рассылкой:',
-                 reply_markup=settings_markup, parse_mode='html')
-
-@bot.message_handler(commands='fact')
-def send_welcome(message):
-    bot.send_message(message.chat.id, facts.extract_fact(message.chat.id), reply_markup=fact_markup, parse_mode='html', disable_web_page_preview=True)
-
-@bot.callback_query_handler(func=lambda call: True)
-def callback_query(call):
-    if call.data == 'next':
-        bot.answer_callback_query(call.id, "Едем дальше...")
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=facts.extract_fact(call.message.chat.id), reply_markup=fact_markup, disable_web_page_preview=True, parse_mode='html')
-    elif call.data == 'privacy':
-        bot.answer_callback_query(call.id, "Приватность в разработке")
-    elif call.data == 'alarm':
-        bot.answer_callback_query(call.id, "Рассылка в разработке")
 
 
-@bot.message_handler(content_types=['contact']) #Объявили ветку, в которой прописываем логику на тот случай, если пользователь решит прислать номер телефона :) 
+@bot.message_handler(content_types=['contact'])
 def contact(message):
-    if message.contact.user_id == message.chat.id: #Если присланный объект <strong>contact</strong> не равен нулю
+    if message.contact.user_id == message.chat.id:
         mydb = mysql.connector.connect(
             host=data['DB_HOST'],
             user=data['DB_USERNAME'],
@@ -93,7 +73,7 @@ Your number is not in the database. Please contact @samorukov''')
     else:
         bot.send_message(message.chat.id, '''Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram
 
-Please send your phone number which is linked to your Telegram account''', reply_markup=ReplyKeyboardRemove())
+Please send your phone number which is linked to your Telegram account''')
         
         
 bot.infinity_polling()
