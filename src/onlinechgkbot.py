@@ -100,19 +100,19 @@ def handle_text(message):
         admin_id = myresult_data[7]
         bot.send_message(message.chat.id, f'state: {state}, number: {number}, admin_id: {admin_id}')
         if int(state) > 0:
-     #       bot.send_message(message.chat.id, f'''вошли''')
-     #       mycursor.close()
-      #      mydb.close()
-       #     mydb = mysql.connector.connect(
-       #         host=data['DB_HOST'],
-       #         user=data['DB_USERNAME'],
-       #         password=data['DB_PASSWORD'],
-     #           database=data['DB_NAME'])
-        #    mycursor = mydb.cursor(buffered=True)
-        #    mycursor.execute(f"UPDATE `TABLE 1` SET `A_{state}`= {message.text}, `state` = 0 WHERE nn = {number}")
-       #     mydb.commit()
-        #    mycursor.close()
-        #    mydb.close()
+            bot.send_message(message.chat.id, f'''вошли''')
+            mycursor.close()
+            mydb.close()
+            mydb = mysql.connector.connect(
+                host=data['DB_HOST'],
+                user=data['DB_USERNAME'],
+                password=data['DB_PASSWORD'],
+                database=data['DB_NAME'])
+            mycursor = mydb.cursor(buffered=True)
+            mycursor.execute(f"UPDATE `TABLE 1` SET `A_{state}`= {message.text}, `state` = 0 WHERE nn = {number}")
+            mydb.commit()
+            mycursor.close()
+            mydb.close()
             bot.send_message(message.chat.id, f'''Ответ отправлен''')
         if int(state) == 0:
             bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
