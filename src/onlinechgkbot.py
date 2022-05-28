@@ -83,19 +83,21 @@ Please send your phone number which is linked to your Telegram account''')
 def handle_text(message):
     bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
     if message.chat.id == 2528316:
-        bot.send_message(message.chat.id, 'упппс')
-        mydb = mysql.connector.connect(
-            host=data['DB_HOST'],
-            user=data['DB_USERNAME'],
-            password=data['DB_PASSWORD'],
-            database=data['DB_NAME'])
-        mycursor = mydb.cursor(buffered=True)
-        mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `user_id` = {message.chat.id}")
-        myresult = mycursor.rowcount
-        myresult_data = mycursor.fetchone()
-        bot.send_message(message.chat.id, str(myresult_data))
-        mycursor.close()
-        mydb.close()
+    mydb = mysql.connector.connect(
+        host=data['DB_HOST'],
+        user=data['DB_USERNAME'],
+        password=data['DB_PASSWORD'],
+        database=data['DB_NAME'])
+    mycursor = mydb.cursor(buffered=True)
+    mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `user_id` = {message.chat.id}")
+    myresult = mycursor.rowcount
+    myresult_data = mycursor.fetchone()
+    bot.send_message(message.chat.id, str(myresult_data))
+    state = myresult_data[6]
+    number = myresult_data[0]
+    bot.send_message(message.chat.id, f'state: {state}, number: {number}')
+    mycursor.close()
+    mydb.close()
 
         
 bot.infinity_polling()
