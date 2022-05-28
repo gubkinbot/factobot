@@ -103,12 +103,14 @@ def handle_text(message):
             bot.send_message(message.chat.id, f'''вошли''')
             mycursor.close()
             mydb.close()
+            bot.send_message(message.chat.id, f'''вошли 2''')
             mydb = mysql.connector.connect(
                 host=data['DB_HOST'],
                 user=data['DB_USERNAME'],
                 password=data['DB_PASSWORD'],
                 database=data['DB_NAME'])
             mycursor = mydb.cursor(buffered=True)
+            bot.send_message(message.chat.id, f'''вошли 3''')
             mycursor.execute(f"UPDATE `TABLE 1` SET A_5 = {message.text}, state = 0 WHERE nn = {number}")
             mydb.commit()
             mycursor.close()
