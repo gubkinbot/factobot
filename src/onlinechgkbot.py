@@ -97,7 +97,8 @@ def handle_text(message):
     
         state = myresult_data[6]
         number = myresult_data[0]
-        bot.send_message(message.chat.id, f'state: {state}, number: {number}')
+        admin_id = myresult_data[7]
+        bot.send_message(message.chat.id, f'state: {state}, number: {number}, admin_id: {admin_id}')
     else:
         bot.send_message(message.chat.id, 'Наобходимо пройти авторизацию!')
     mycursor.close()
