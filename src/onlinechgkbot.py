@@ -109,7 +109,7 @@ def handle_text(message):
                 password=data['DB_PASSWORD'],
                 database=data['DB_NAME'])
             mycursor = mydb.cursor(buffered=True)
-            mycursor.execute(f"UPDATE `TABLE 1` SET `A_{state}`= {message.text}, `state` = 0 WHERE nn = {number}")
+            mycursor.execute(f"UPDATE `TABLE 1` SET A_5 = {message.text}, state = 0 WHERE nn = {number}")
             mydb.commit()
             mycursor.close()
             mydb.close()
