@@ -92,7 +92,7 @@ def handle_text(message):
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     if myresult >= 1:
-        bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
+        
         bot.send_message(message.chat.id, str(myresult_data))
     
         state = myresult_data[6]
@@ -112,6 +112,9 @@ def handle_text(message):
             mydb.commit()
             mycursor.close()
             mydb.close()
+            bot.send_message(message.chat.id, f'''Ответ отправлен''')
+        else:
+            bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
     else:
         bot.send_message(message.chat.id, 'Наобходимо пройти авторизацию!')
     mycursor.close()
