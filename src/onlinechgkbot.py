@@ -100,6 +100,7 @@ def handle_text(message):
         admin_id = myresult_data[7]
         bot.send_message(message.chat.id, f'state: {state}, number: {number}, admin_id: {admin_id}')
         if state > 0:
+            bot.send_message(message.chat.id, f'''вошли''')
             mycursor.close()
             mydb.close()
             mydb = mysql.connector.connect(
