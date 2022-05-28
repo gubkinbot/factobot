@@ -112,7 +112,7 @@ def handle_text(message):
                 database=data['DB_NAME'])
             mycursor = mydb.cursor(buffered=True)
             bot.send_message(message.chat.id, f'''вошли 3''')
-            mycursor.execute(f"UPDATE `TABLE 1` SET {adr} = `фвуфувыв`, state = 0 WHERE nn = {number}")
+            mycursor.execute(f"UPDATE `TABLE 1` SET {adr} = 'фвуфувыв', state = 0 WHERE nn = {number}")
             mydb.commit()
             mycursor.close()
             mydb.close()
