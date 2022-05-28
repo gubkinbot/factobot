@@ -99,7 +99,7 @@ def handle_text(message):
         number = myresult_data[0]
         admin_id = myresult_data[7]
         bot.send_message(message.chat.id, f'state: {state}, number: {number}, admin_id: {admin_id}')
-        if state > 0:
+        if int(state) > 0:
      #       bot.send_message(message.chat.id, f'''вошли''')
      #       mycursor.close()
       #      mydb.close()
@@ -114,7 +114,7 @@ def handle_text(message):
         #    mycursor.close()
         #    mydb.close()
             bot.send_message(message.chat.id, f'''Ответ отправлен''')
-        if state == 0:
+        if int(state) == 0:
             bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
     else:
         bot.send_message(message.chat.id, 'Наобходимо пройти авторизацию!')
