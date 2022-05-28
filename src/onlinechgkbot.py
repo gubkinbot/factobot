@@ -23,11 +23,6 @@ settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
 
 
-@bot.message_handler(content_types=["text"])
-def handle_text(message):
-  bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
-
-
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
     keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -82,6 +77,11 @@ Your number is not in the database. Please contact @samorukov''')
         bot.send_message(message.chat.id, '''Пожалуйста, отправьте свой номер телефона, который привязан к аккаунту Telegram
 
 Please send your phone number which is linked to your Telegram account''')
+
+        
+@bot.message_handler(content_types=["text"])
+def handle_text(message):
+  bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')        
         
         
 bot.infinity_polling()
