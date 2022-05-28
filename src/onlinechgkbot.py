@@ -82,7 +82,6 @@ Please send your phone number which is linked to your Telegram account''')
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
-    if message.chat.id == 2528316:
     mydb = mysql.connector.connect(
         host=data['DB_HOST'],
         user=data['DB_USERNAME'],
