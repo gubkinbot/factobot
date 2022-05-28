@@ -22,6 +22,12 @@ fact_markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
 settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
 
+
+@bot.message_handler(content_types=["text"])
+def handle_text(message):
+  bot.send_message(message.chat.id, f'''В данный момент ответы не принимаются.''')
+
+
 @bot.message_handler(commands=['start', 'info'])
 def send_welcome(message):
     keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
