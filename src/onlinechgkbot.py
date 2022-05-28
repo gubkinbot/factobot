@@ -94,7 +94,7 @@ def handle_text(message):
     if myresult >= 1:    
         state = myresult_data[6]
         number = myresult_data[0]
-        adr = "A_" + str(number)
+        adr = "A_" + str(state)
         admin_id = myresult_data[7]
         if int(state) > 0:
             mycursor.close()
