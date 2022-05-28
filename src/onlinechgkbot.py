@@ -97,7 +97,7 @@ def handle_text(message):
     
         state = myresult_data[6]
         number = myresult_data[0]
-        adr = "A_" + number
+        adr = "A_" + str(number)
         admin_id = myresult_data[7]
         bot.send_message(message.chat.id, f'state: {state}, number: {number}, admin_id: {admin_id}')
         if int(state) > 0:
