@@ -52,7 +52,7 @@ def send_welcome(message):
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     result_markup = InlineKeyboardMarkup()
-    result_markup.add(InlineKeyboardButton('Результаты', url = 'https://samorukoooooooooov.uz/'))
+    result_markup.add(InlineKeyboardButton('Результаты', url = f'https://samorukov.uz/onlinechgkbot/?username={myresult_data[1]}?password={myresult_data[2]}'))
     bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=result_markup, parse_mode='html', disable_web_page_preview=True)
     mycursor.close()
     mydb.close()
