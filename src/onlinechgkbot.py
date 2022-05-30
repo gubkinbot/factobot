@@ -51,9 +51,9 @@ def send_welcome(message):
     mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `user_id` = {message.chat.id}")
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
-    results_markup = InlineKeyboardMarkup()
-    results_markup.add(InlineKeyboardButton('Результаты', url = 'https://samorukoooooooooov.uz/'))
-    bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
+    result_markup = InlineKeyboardMarkup()
+    result_markup.add(InlineKeyboardButton('Результаты', url = 'https://samorukoooooooooov.uz/'))
+    bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=result_markup, parse_mode='html', disable_web_page_preview=True)
     mycursor.close()
     mydb.close()
     
