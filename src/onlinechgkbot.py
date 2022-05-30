@@ -41,8 +41,18 @@ To continue, please share your phone number by clicking on the button at the bot
 @bot.message_handler(commands=['results'])
 def send_welcome(message):
     bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
-
-
+    mydb = mysql.connector.connect(
+    host=data['DB_HOST'],
+    user=data['DB_USERNAME'],
+    password=data['DB_PASSWORD'],
+    atabase=data['DB_NAME'])
+    mycursor = mydb.cursor(buffered=True)
+    mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `user_id` = {message.chat.id}")
+    myresult = mycursor.rowcount
+    myresult_data = mycursor.fetchone()
+    bot.send_message(message.chat.id, f'Ниже дана уникальная ссылка с актуальными результатами.{myresult_data[3]}', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
+    
+    
 @bot.message_handler(content_types=['contact'])
 def contact(message):
     if message.contact.user_id == message.chat.id:
