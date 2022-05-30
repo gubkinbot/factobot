@@ -16,8 +16,7 @@ data = yaml.safe_load(open(config_path))
 
 bot = telebot.TeleBot(data['ONLINECHGKBOT'])
 
-results_markup = InlineKeyboardMarkup()
-results_markup.add(InlineKeyboardButton('Результаты', url = 'https://samorukov.uz'))
+
 
 settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
@@ -52,7 +51,10 @@ def send_welcome(message):
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
     
-    bot.send_message(message.chat.id, f'Ниже дана уникальная ссылка с актуальными результатами.{myresult_data[1]}', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
+    results_markup = InlineKeyboardMarkup()
+    results_markup.add(InlineKeyboardButton('Результаты', url = f'https://samorukov.uz/?username={myresult_data[1]}?password={myresult_data[2]}'))
+    
+    bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
     mycursor.close()
     mydb.close()
     
