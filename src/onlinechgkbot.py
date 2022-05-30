@@ -16,8 +16,8 @@ data = yaml.safe_load(open(config_path))
 
 bot = telebot.TeleBot(data['ONLINECHGKBOT'])
 
-fact_markup = InlineKeyboardMarkup()
-fact_markup.add(InlineKeyboardButton('Ещё!', callback_data="next"))
+results_markup = InlineKeyboardMarkup()
+results_markup.add(InlineKeyboardButton('Результаты', url = 'https://samorukov.uz'))
 
 settings_markup = InlineKeyboardMarkup(row_width=1)
 settings_markup.add(InlineKeyboardButton('Приватность', callback_data="privacy"), InlineKeyboardButton('Рассылка', callback_data="alarm"))
@@ -40,7 +40,7 @@ To continue, please share your phone number by clicking on the button at the bot
     
 @bot.message_handler(commands=['results'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, 'Актуальная информация!', reply_markup=fact_markup, parse_mode='html', disable_web_page_preview=True)
+    bot.send_message(message.chat.id, 'Ниже дана уникальная ссылка с актуальными результатами.', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
 
 
 @bot.message_handler(content_types=['contact'])
