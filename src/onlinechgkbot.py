@@ -36,6 +36,11 @@ def send_welcome(message):
     
 To continue, please share your phone number by clicking on the button at the bottom of the screen
 ''', reply_markup=keyboard, parse_mode='html')
+    
+    
+@bot.message_handler(commands=['results'])
+def send_welcome(message):
+    bot.send_message(message.chat.id, 'Актуальная информация!', reply_markup=fact_markup, parse_mode='html', disable_web_page_preview=True)
 
 
 @bot.message_handler(content_types=['contact'])
