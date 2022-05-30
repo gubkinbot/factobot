@@ -50,7 +50,10 @@ def send_welcome(message):
     mycursor.execute(f"SELECT * FROM `TABLE 1` WHERE `user_id` = {message.chat.id}")
     myresult = mycursor.rowcount
     myresult_data = mycursor.fetchone()
-    bot.send_message(message.chat.id, f'Ниже дана уникальная ссылка с актуальными результатами.{myresult_data[3]}', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
+    bot.send_message(message.chat.id, f'Ниже дана уникальная ссылка с актуальными результатами.{myresult_data[1]}', reply_markup=results_markup, parse_mode='html', disable_web_page_preview=True)
+    mycursor.close()
+    mydb.close()
+    
     
     
 @bot.message_handler(content_types=['contact'])
