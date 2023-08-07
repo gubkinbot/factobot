@@ -31,7 +31,7 @@ jobs:
       #   run: echo "Test test done."
 
       - name: Run tests
-        run: python3 ./src/test.py
+        run: python3 ./bot/test.py
 
     env:
       CI: true # show terminal output!
@@ -52,5 +52,5 @@ jobs:
           script: |
             cd /home/factobot/
             git pull
-            pm2 reload all
+          # pm2 reload all
           # python3 ./src/run.py
