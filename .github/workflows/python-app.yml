@@ -31,7 +31,7 @@ jobs:
       #   run: echo "Test test done."
 
       - name: Run tests
-        run: python3 ./src/test.py
+        run: python3 ./bot/test.py
 
     env:
       CI: true # show terminal output!
