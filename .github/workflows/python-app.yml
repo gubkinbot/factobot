@@ -52,5 +52,5 @@ jobs:
           script: |
             cd /home/factobot/
             git pull
-            pm2 reload all
+          # pm2 reload all
           # python3 ./src/run.py
