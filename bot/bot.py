@@ -4,7 +4,7 @@ import telebot
 
 load_dotenv('./.env')
 
-bot_token = os.environ.get('TG_TOKEN')
+bot_token = os.environ.get('TG_FACTOBOT')
 
 bot = telebot.TeleBot(bot_token)
 
