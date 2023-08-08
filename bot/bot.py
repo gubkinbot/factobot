@@ -16,7 +16,7 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
-    markup = types.ReplyKeyboardMarkup(row_width=2)
+    markup = types.ReplyKeyboardMarkup(row_width=2, one_time_keyboard=True)
     item1 = types.KeyboardButton('Кнопка 1')
     item2 = types.KeyboardButton('Кнопка 2')
     markup.add(item1, item2)
