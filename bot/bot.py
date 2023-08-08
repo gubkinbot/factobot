@@ -20,7 +20,7 @@ def echo_message(message):
     item1 = types.InlineKeyboardButton('🤔', callback_data='what')
     item2 = types.InlineKeyboardButton('👍', callback_data='good')
     markup.add(item1, item2)
-    bot.send_message(message, f'Очень интересная информация... ', reply_markup=markup)
+    bot.send_message(chat_id=message.chat.id, text=f'Очень интересная информация... ', reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
