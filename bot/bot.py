@@ -25,6 +25,20 @@ def send_welcome(message):
 '''
     bot.send_message(message.chat.id, response, parse_mode='HTML')
 
+@bot.message_handler(commands=['fact'])
+def send_welcome(message):
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    item1 = types.InlineKeyboardButton('🤔', callback_data='what')
+    item2 = types.InlineKeyboardButton('👍', callback_data='good')
+    markup.add(item1, item2)
+    formatted_text = f'''<strong>List Comprehension</strong>
+
+<tg-spoiler>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.
+
+>> [i for i in range(5)]
+<< [0, 1, 2, 3, 4]</tg-spoiler>'''
+    bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
+
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
     markup = types.InlineKeyboardMarkup(row_width=2)
