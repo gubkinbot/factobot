@@ -16,11 +16,12 @@ def generate_password():
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
+    password = generate_password()
     response = f'''Добро пожаловать в @factobot!
 
 Заносите интересные факты, которые узнали в IT-академии Uzum через factobot.uz, используя ваши учетные данные:
 Логин: `{message.chat.id}`
-Пароль: `{generate_password()}`
+Пароль: `{password}`
 '''
     bot.send_message(message.chat.id, response, parse_mode='MarkdownV2')
 
