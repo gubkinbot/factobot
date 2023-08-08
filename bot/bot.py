@@ -20,6 +20,13 @@ def echo_message(message):
     item1 = types.InlineKeyboardButton('🤔', callback_data='what')
     item2 = types.InlineKeyboardButton('👍', callback_data='good')
     markup.add(item1, item2)
-    bot.reply_to(message, f'кукареку: {message.text}', reply_markup=markup)
+    bot.send_message(message, f'Очень интересная информация... ', reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: True)
+def handle_callback_query(call):
+    if call.data == 'what':
+        bot.answer_callback_query(call.id, "Вы что-то не поняли?")
+    elif call.data == 'good':
+        bot.answer_callback_query(call.id, "Агонь, да!")
 
 bot.polling()
