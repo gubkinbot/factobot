@@ -6,7 +6,7 @@ import random
 import string
 # import openai
 
-load_dotenv('./.env')
+load_dotenv('../.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
 aaa = os.getenv("OPENAI_ORG")
