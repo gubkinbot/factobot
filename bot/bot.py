@@ -17,5 +17,4 @@ def send_welcome(message):
 def echo_message(message):
     bot.reply_to(message, f'кукареку: {message.text}')
 
-
 bot.polling()
