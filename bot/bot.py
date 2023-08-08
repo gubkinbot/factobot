@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import telebot
+from telebot import types
 
 load_dotenv('./.env')
 
@@ -15,6 +16,10 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
-    bot.reply_to(message, f'кукареку: {message.text}')
+    markup = types.ReplyKeyboardMarkup(row_width=2)
+    item1 = types.KeyboardButton('Кнопка 1')
+    item2 = types.KeyboardButton('Кнопка 2')
+    markup.add(item1, item2)
+    bot.reply_to(message, f'кукареку: {message.text}', reply_markup=markup)
 
 bot.polling()
