@@ -4,13 +4,13 @@ import telebot
 from telebot import types
 import random
 import string
-# import openai
+import openai
 
 load_dotenv('../.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
-aaa = os.getenv("OPENAI_ORG")
-uuu = os.getenv("OPENAI_API_KEY")
+openai.organization = os.getenv("OPENAI_ORG")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 bot = telebot.TeleBot(bot_token)
 
@@ -30,18 +30,18 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['fact'])
 def send_welcome(message):
+    response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
+                                        messages=[
+                                            {"role": "system", "content": "You are an experienced Data Science Specialist. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
+                                            {"role": "user", "content": "give practical note"}])
     markup = types.InlineKeyboardMarkup(row_width=2)
     item1 = types.InlineKeyboardButton('🤔', callback_data='what')
     item2 = types.InlineKeyboardButton('👍', callback_data='good')
     markup.add(item1, item2)
     formatted_text = f'''<strong>List Comprehension</strong>
 
-<tg-spoiler>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.</tg-spoiler>
-
-<tg-spoiler><code>&gt;&gt;&gt; [i for i in range(5)]</code></tg-spoiler>
-<tg-spoiler><code>[0, 1, 2, 3, 4]</code></tg-spoiler>
-{aaa}
-{uuu}'''
+<tg-spoiler>{response['choices'][0]['message']['content']}</tg-spoiler>
+'''
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
