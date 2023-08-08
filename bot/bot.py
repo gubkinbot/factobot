@@ -35,8 +35,8 @@ def send_welcome(message):
 
 <tg-spoiler>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.
 
-&gt;&gt;&gt; [i for i in range(5)]
-[0, 1, 2, 3, 4]</tg-spoiler>'''
+<code>&gt;&gt;&gt; [i for i in range(5)]
+[0, 1, 2, 3, 4]</code></tg-spoiler>'''
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
