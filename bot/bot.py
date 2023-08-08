@@ -14,10 +14,14 @@ bot = telebot.TeleBot(bot_token)
 def generate_password():
     return ''.join(random.choice(string.digits) for _ in range(5))
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['start'])
 def send_welcome(message):
-    response = f"Логин: {message.chat.id}, пароль {generate_password()}"
-    bot.send_message(message.chat.id, response)
+    response = f'''Логин: `{message.chat.id}`, пароль `{generate_password()}`
+```python
+pre-formatted fixed-width code block written in the Python programming language
+```
+'''
+    bot.send_message(message.chat.id, response, parse_mode='MarkdownV2')
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
