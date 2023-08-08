@@ -18,7 +18,7 @@ def generate_password():
 def send_welcome(message):
     response = f'''Логин: `{message.chat.id}`, пароль `{generate_password()}`
 ```python
-print('Hello!')
+print(ahost)
 ```
 '''
     bot.send_message(message.chat.id, response, parse_mode='MarkdownV2')
