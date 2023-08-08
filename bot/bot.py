@@ -4,10 +4,13 @@ import telebot
 from telebot import types
 import random
 import string
+# import openai
 
 load_dotenv('./.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
+print(os.getenv("OPENAI_ORG"))
+print(os.getenv("OPENAI_API_KEY"))
 
 bot = telebot.TeleBot(bot_token)
 
