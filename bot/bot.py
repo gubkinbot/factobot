@@ -19,11 +19,11 @@ def send_welcome(message):
     password = generate_password()
     response = f'''Добро пожаловать в @factobot!
 
-Заносите интересные факты\, которые узнали в IT\-академии Uzum через factobot\.uz\, используя ваши учетные данные\:
-Логин\: `{message.chat.id}`
-Пароль\: `{password}`
+Заносите интересные факты, которые узнали в IT-академии Uzum через factobot.uz, используя ваши учетные данные:
+Логин: <pre>{message.chat.id}</pre>
+Пароль: <pre>{password}</pre>
 '''
-    bot.send_message(message.chat.id, response, parse_mode='MarkdownV2')
+    bot.send_message(message.chat.id, response, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
