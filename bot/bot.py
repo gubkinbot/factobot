@@ -26,7 +26,7 @@ def send_welcome(message):
 Логин: <pre>{message.chat.id}</pre>
 Пароль: <pre>{password}</pre>
 '''
-    bot.send_message(message.chat.id, response + aaa + uuu, parse_mode='HTML')
+    bot.send_message(message.chat.id, response, parse_mode='HTML')
 
 @bot.message_handler(commands=['fact'])
 def send_welcome(message):
@@ -39,7 +39,9 @@ def send_welcome(message):
 <tg-spoiler>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.</tg-spoiler>
 
 <tg-spoiler><code>&gt;&gt;&gt; [i for i in range(5)]</code></tg-spoiler>
-<tg-spoiler><code>[0, 1, 2, 3, 4]</code></tg-spoiler>'''
+<tg-spoiler><code>[0, 1, 2, 3, 4]</code></tg-spoiler>
+{aaa}
+{uuu}'''
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
