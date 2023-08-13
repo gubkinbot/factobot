@@ -39,7 +39,7 @@ def send_welcome(message):
         pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, 'reg']]).to_sql(name='log', con=engine, if_exists='append', index=False)
     response = f'''<b>Добро пожаловать в @factobot!</b>
 
-Здесь собраны все короткие заметки студентов IT-академии Uzum по направлениям анализа данных и машинного обучения.
+Здесь собраны короткие заметки по анализу данных и машинному обучению.
 
 Заносите свои заметки через factobot.uz, используя личные учетные данные:
 Логин: <pre>{message.chat.id}</pre>
@@ -65,7 +65,7 @@ def send_fact(message):
     item1 = types.InlineKeyboardButton('👍', callback_data=f'good|{fact.iloc[0].note_id}')
     item2 = types.InlineKeyboardButton('👎', callback_data=f'bad|{fact.iloc[0].note_id}')
     markup.add(item1, item2)
-    formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
+    formatted_text = f'''<strong>Заметка №{fact.iloc[0].note_id}</strong>
 
 {fact.iloc[0].note_text}'''	 
     pd.DataFrame(columns=['user_id', 'action', 'note_id'], data=[[message.chat.id, '/fact', fact.iloc[0].note_id]]).to_sql(name='log', con=engine, if_exists='append', index=False)
@@ -78,7 +78,7 @@ def echo_message(message):
         current_fact = pd.read_sql_query(sql=f"SELECT * FROM `facts` WHERE note_id = {history.iloc[0].note_id}", con=engine)
         response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
                                         messages=[
-                                            {"role": "system", "content": "You are an experienced Data Science Specialist, your name is @factobot. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
+                                            {"role": "system", "content": "You are an experienced Data Science Specialist, your name is @factobot. Students come to you. You need to answer only in Russian."},
                                             {"role": "user", "content": current_fact.iloc[0].note_text},
                                             {"role": "user", "content": message.text}])
         bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
@@ -91,9 +91,9 @@ def handle_callback_query(call):
     call_data_array = call.data.split('|')
     if call_data_array[0] == 'bad':
         pd.DataFrame(columns=['user_id', 'note_id', 'rating'], data=[[call.from_user.id, call_data_array[1], 'bad']]).to_sql(name='ratings', con=engine, if_exists='append', index=False)
-        bot.answer_callback_query(call.id, f"Безобразие!{call_data_array[1]}")
+        bot.answer_callback_query(call.id, f"Безобразие!")
     elif call_data_array[0] == 'good':
         pd.DataFrame(columns=['user_id', 'note_id', 'rating'], data=[[call.from_user.id, call_data_array[1], 'good']]).to_sql(name='ratings', con=engine, if_exists='append', index=False)
-        bot.answer_callback_query(call.id, f"Агонь, согласен!{call_data_array[1]}")
+        bot.answer_callback_query(call.id, f"Агонь, согласен!")
 
 bot.polling()
