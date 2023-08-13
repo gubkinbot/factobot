@@ -29,7 +29,12 @@ def generate_password():
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    password = generate_password()
+    check_user = pd.read_sql_query(sql=f'SELECT * FROM `users` WHERE username = {message.chat.id}', con=engine)
+    if len(check_user) > 0:
+        password = check_user.iloc[0].password
+    else:
+        password = generate_password()
+        pd.DataFrame(columns=['username', 'password'], data=[[message.chat.id, password]]).to_sql(name='users', con=engine, if_exists='append', index=False)
     response = f'''<b>Добро пожаловать в @factobot!</b>
 
 Здесь собраны все короткие заметки студентов IT-академии Uzum по направлению анализ данных и машинное обучение.
@@ -44,7 +49,6 @@ def send_welcome(message):
 
 ⚖️ Оценивайте заметки. Хорошие заметки будут показываться чаще, плохие — реже.
 ''' 	 	
-    pd.DataFrame(columns=['username', 'password'], data=[[message.chat.id, password]]).to_sql(name='users', con=engine, if_exists='append', index=False)
     bot.send_message(message.chat.id, response, parse_mode='HTML')
 
 
