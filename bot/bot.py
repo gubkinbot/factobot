@@ -68,7 +68,7 @@ def send_fact(message):
     formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
 
 {fact.iloc[0].note_text}'''	 
-    pd.DataFrame(columns=['user_id', 'action', 'note_id'], data=[[message.chat.id, 'fact', fact.iloc[0].note_id]]).to_sql(name='log', con=engine, if_exists='append', index=False)
+    pd.DataFrame(columns=['user_id', 'action', 'note_id'], data=[[message.chat.id, '/fact', fact.iloc[0].note_id]]).to_sql(name='log', con=engine, if_exists='append', index=False)
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
