@@ -5,12 +5,23 @@ from telebot import types
 import random
 import string
 import openai
+import mysql.connector
+import pandas as pd
+from sqlalchemy import create_engine
+
 
 load_dotenv('../.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
 openai.organization = os.getenv("OPENAI_ORG")
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+DB_FACT_HOST = os.getenv("DB_FACT_HOST")
+DB_FACT_USER = os.getenv("DB_FACT_USER")
+DB_FACT_PASSWORD = os.getenv("DB_FACT_PASSWORD")
+DB_FACT_NAME = os.getenv("DB_FACT_NAME")
+
+engine = create_engine(f"mysql+mysqlconnector://{DB_FACT_USER}:{DB_FACT_PASSWORD}@{DB_FACT_HOST}/{DB_FACT_NAME}")
 
 bot = telebot.TeleBot(bot_token)
 
@@ -46,9 +57,10 @@ def send_fact(message):
     item1 = types.InlineKeyboardButton('👍', callback_data='good')
     item2 = types.InlineKeyboardButton('👎', callback_data='bad')
     markup.add(item1, item2)
-    formatted_text = f'''<strong>List Comprehension</strong>
+    fact = pd.read_sql_query(sql='SELECT * FROM facts ORDER BY RAND() LIMIT 1;', con=engine)
+    formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
 
-<tg-spoiler>{response['choices'][0]['message']['content']}</tg-spoiler>
+{fact.iloc[0].note_text}
 '''
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
