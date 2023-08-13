@@ -55,8 +55,7 @@ def send_fact(message):
     markup.add(item1, item2)
     formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
 
-{fact.iloc[0].note_text}
-'''
+{fact.iloc[0].note_text}'''
     bot.send_message(chat_id=message.chat.id, text=formatted_text, reply_markup=markup, parse_mode='HTML')
 
 @bot.message_handler(func=lambda message: True)
@@ -71,8 +70,10 @@ def echo_message(message):
 def handle_callback_query(call):
     call_data_array = call.data.split('|')
     if call_data_array[0] == 'bad':
+        pd.DataFrame(columns=['user_id', 'note_id', 'rating'], data=[[call.from_user.id, call_data_array[1], 'bad']]).to_sql(name='ratings', con=engine, if_exists='append', index=False)
         bot.answer_callback_query(call.id, f"Безобразие!{call_data_array[1]}")
     elif call_data_array[0] == 'good':
+        pd.DataFrame(columns=['user_id', 'note_id', 'rating'], data=[[call.from_user.id, call_data_array[1], 'good']]).to_sql(name='ratings', con=engine, if_exists='append', index=False)
         bot.answer_callback_query(call.id, f"Агонь, согласен!{call_data_array[1]}")
 
 bot.polling()
