@@ -9,7 +9,6 @@ import mysql.connector
 import pandas as pd
 from sqlalchemy import create_engine
 
-
 load_dotenv('../.env')
 
 bot_token = os.environ.get('TG_FACTOBOT')
@@ -50,8 +49,8 @@ def send_welcome(message):
 @bot.message_handler(commands=['fact'])
 def send_fact(message):
     markup = types.InlineKeyboardMarkup(row_width=2)
-    item1 = types.InlineKeyboardButton('👍', callback_data='good')
-    item2 = types.InlineKeyboardButton('👎', callback_data='bad')
+    item1 = types.InlineKeyboardButton('👍', callback_data=f'good|{fact.iloc[0].note_id}')
+    item2 = types.InlineKeyboardButton('👎', callback_data=f'bad|{fact.iloc[0].note_id}')
     markup.add(item1, item2)
     fact = pd.read_sql_query(sql='SELECT * FROM facts ORDER BY RAND() LIMIT 1;', con=engine)
     formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
@@ -70,9 +69,10 @@ def echo_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
-    if call.data == 'bad':
-        bot.answer_callback_query(call.id, "Безобразие!")
-    elif call.data == 'good':
-        bot.answer_callback_query(call.id, "Агонь, согласен!")
+    call_data_array = call.data.split('|')
+    if call_data_array[0] == 'bad':
+        bot.answer_callback_query(call.id, f"Безобразие!{call_data_array[1]}")
+    elif call_data_array[0] == 'good':
+        bot.answer_callback_query(call.id, f"Агонь, согласен!{call_data_array[1]}")
 
 bot.polling()
