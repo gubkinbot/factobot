@@ -48,11 +48,11 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['fact'])
 def send_fact(message):
+    fact = pd.read_sql_query(sql='SELECT * FROM facts ORDER BY RAND() LIMIT 1;', con=engine)
     markup = types.InlineKeyboardMarkup(row_width=2)
     item1 = types.InlineKeyboardButton('👍', callback_data=f'good|{fact.iloc[0].note_id}')
     item2 = types.InlineKeyboardButton('👎', callback_data=f'bad|{fact.iloc[0].note_id}')
     markup.add(item1, item2)
-    fact = pd.read_sql_query(sql='SELECT * FROM facts ORDER BY RAND() LIMIT 1;', con=engine)
     formatted_text = f'''<strong>{fact.iloc[0].note_id}</strong>
 
 {fact.iloc[0].note_text}
