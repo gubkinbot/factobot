@@ -83,10 +83,10 @@ def echo_message(message):
                                             {"role": "user", "content": current_fact.iloc[0].note_text},
                                             {"role": "user", "content": message.text}])
         bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
-        pd.DataFrame(columns=['user_id', 'question', 'answer'], data=[[message.chat.id, 'answer']]).to_sql(name='log', con=engine, if_exists='append', index=False)
-        pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, message.text, response['choices'][0]['message']['content']]]).to_sql(name='dialogues', con=engine, if_exists='append', index=False)
+        pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, 'answer']]).to_sql(name='log', con=engine, if_exists='append', index=False)
+        pd.DataFrame(columns=['user_id', 'question', 'answer'], data=[[message.chat.id, message.text, response['choices'][0]['message']['content']]]).to_sql(name='dialogues', con=engine, if_exists='append', index=False)
     else:
-        pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, message.text, 'Пожалуйста, ознакомьтесь с заметкой с помощью команды /fact, а затем задавайте вопросы']]).to_sql(name='dialogues', con=engine, if_exists='append', index=False)
+        pd.DataFrame(columns=['user_id', 'question', 'answer'], data=[[message.chat.id, message.text, 'Пожалуйста, ознакомьтесь с заметкой с помощью команды /fact, а затем задавайте вопросы']]).to_sql(name='dialogues', con=engine, if_exists='append', index=False)
         bot.send_message(chat_id=message.chat.id, text='Пожалуйста, ознакомьтесь с заметкой с помощью команды /fact, а затем задавайте вопросы', parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: True)
