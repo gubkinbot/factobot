@@ -43,8 +43,14 @@ def send_welcome(message):
 🤖 Если что-то не понятно — спрашивайте, вам ответит ChatGPT.
 
 ⚖️ Оценивайте заметки. Хорошие заметки будут показываться чаще, плохие — реже.
-'''
+''' 	 	
+    pd.DataFrame(columns=['username', 'password'], data=[[message.chat.id, password]]).to_sql(name='users', con=engine, if_exists='append', index=False)
     bot.send_message(message.chat.id, response, parse_mode='HTML')
+
+
+@bot.message_handler(commands=['settings'])
+def send_welcome(message):
+    bot.send_message(message.chat.id, 'В разработке. Здесь будет статистика использования, возможность отключения общего пула заметок.', parse_mode='HTML')
 
 @bot.message_handler(commands=['fact'])
 def send_fact(message):
