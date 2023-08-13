@@ -47,7 +47,7 @@ def send_welcome(message):
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
     markup = types.InlineKeyboardMarkup(row_width=2)
-    item1 = types.InlineKeyboardButton('🤔', callback_data='what')
+    item1 = types.InlineKeyboardButton('👎', callback_data='bad')
     item2 = types.InlineKeyboardButton('👍', callback_data='good')
     markup.add(item1, item2)
     formatted_text = f'''Это текст, в котором есть скрытый текст:
@@ -57,9 +57,9 @@ def echo_message(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
-    if call.data == 'what':
-        bot.answer_callback_query(call.id, "Вы что-то не поняли?")
+    if call.data == 'bad':
+        bot.answer_callback_query(call.id, "Большое этого не будет")
     elif call.data == 'good':
-        bot.answer_callback_query(call.id, "Агонь, да!")
+        bot.answer_callback_query(call.id, "Агонь, согласен!")
 
 bot.polling()
