@@ -73,11 +73,16 @@ def send_fact(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
-    response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
+    history = pd.read_sql_query(sql=f"SELECT * FROM `log` WHERE user_id = {message.chat.id} order by datetime desc limit 10", con=engine)
+    if history.iloc[0].action == '/fact':
+        bot.send_message(chat_id=message.chat.id, text='можно отвечать, последняя запись по факту', parse_mode='HTML')
+        response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
                                         messages=[
                                             {"role": "system", "content": "You are an experienced Data Science Specialist. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
                                             {"role": "user", "content": message.text}])
-    bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
+        bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
+    else:
+        bot.send_message(chat_id=message.chat.id, text='Пожалуйста, ознакомьтесь с заметкой с помощью команды /fact, а затем задавайте вопросы', parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
