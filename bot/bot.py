@@ -75,6 +75,7 @@ def send_fact(message):
 def echo_message(message):
     history = pd.read_sql_query(sql=f"SELECT * FROM `log` WHERE user_id = {message.chat.id} order by datetime desc limit 10", con=engine)
     if history.iloc[0].action == '/fact':
+        bot.send_chat_action(message.chat.id, 'typing')
         current_fact = pd.read_sql_query(sql=f"SELECT * FROM `facts` WHERE note_id = {history.iloc[0].note_id}", con=engine)
         response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
                                         messages=[
