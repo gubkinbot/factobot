@@ -82,6 +82,7 @@ def echo_message(message):
                                             {"role": "user", "content": current_fact.iloc[0].note_text},
                                             {"role": "user", "content": message.text}])
         bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
+        pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, 'answer']]).to_sql(name='log', con=engine, if_exists='append', index=False)
     else:
         bot.send_message(chat_id=message.chat.id, text='Пожалуйста, ознакомьтесь с заметкой с помощью команды /fact, а затем задавайте вопросы', parse_mode='HTML')
 
