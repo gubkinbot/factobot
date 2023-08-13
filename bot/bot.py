@@ -66,7 +66,7 @@ def echo_message(message):
                                         messages=[
                                             {"role": "system", "content": "You are an experienced Data Science Specialist. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
                                             {"role": "user", "content": message.text}])
-    bot.send_message(chat_id=message.chat.id, text='Ответ ChatGPT', parse_mode='HTML')
+    bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
