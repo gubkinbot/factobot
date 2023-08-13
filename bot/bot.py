@@ -75,10 +75,11 @@ def send_fact(message):
 def echo_message(message):
     history = pd.read_sql_query(sql=f"SELECT * FROM `log` WHERE user_id = {message.chat.id} order by datetime desc limit 10", con=engine)
     if history.iloc[0].action == '/fact':
-        bot.send_message(chat_id=message.chat.id, text='можно отвечать, последняя запись по факту', parse_mode='HTML')
+        current_fact = pd.read_sql_query(sql=f"SELECT * FROM `facts` WHERE note_id = {history.iloc[0].note_id}", con=engine)
         response = openai.ChatCompletion.create(model='gpt-3.5-turbo',
                                         messages=[
                                             {"role": "system", "content": "You are an experienced Data Science Specialist. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
+                                            {"role": "user", "content": current_fact.iloc[0].note_text},
                                             {"role": "user", "content": message.text}])
         bot.send_message(chat_id=message.chat.id, text=response['choices'][0]['message']['content'], parse_mode='HTML')
     else:
