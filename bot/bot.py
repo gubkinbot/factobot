@@ -32,6 +32,7 @@ def send_welcome(message):
     check_user = pd.read_sql_query(sql=f'SELECT * FROM `users` WHERE username = {message.chat.id}', con=engine)
     if len(check_user) > 0:
         password = check_user.iloc[0].password
+        pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, '/start']]).to_sql(name='log', con=engine, if_exists='append', index=False)
     else:
         password = generate_password()
         pd.DataFrame(columns=['username', 'password'], data=[[message.chat.id, password]]).to_sql(name='users', con=engine, if_exists='append', index=False)
@@ -54,6 +55,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['settings'])
 def send_welcome(message):
+    pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, '/settings']]).to_sql(name='log', con=engine, if_exists='append', index=False)
     bot.send_message(message.chat.id, 'В разработке. Здесь будет статистика использования, возможность отключения общего пула заметок.', parse_mode='HTML')
 
 @bot.message_handler(commands=['fact'])
