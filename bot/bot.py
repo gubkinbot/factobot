@@ -20,11 +20,15 @@ def generate_password():
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     password = generate_password()
-    response = f'''Добро пожаловать в @factobot!
+    response = f'''<b>Добро пожаловать в @factobot!</b>
 
-Заносите интересные факты, которые узнали в IT-академии Uzum через factobot.uz, используя ваши учетные данные:
+Здесь собраны все короткие заметки студентов IT-академии Uzum по направлению анализ данных и машинное обучение.
+
+Заносите свои заметки через factobot.uz, используя ваши личные учетные данные:
 Логин: <pre>{message.chat.id}</pre>
 Пароль: <pre>{password}</pre>
+
+Вызывайте свои и чужие заметки, использую команду /fact. Если что-то не понятно — спрашивайте, вам ответит ChatGPT. Оценивайте заметки. Хорошие заметки будут показываться чаще, плохие — реже.
 '''
     bot.send_message(message.chat.id, response, parse_mode='HTML')
 
