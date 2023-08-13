@@ -35,7 +35,7 @@ def send_welcome(message):
                                             {"role": "system", "content": "You are an experienced Data Science Specialist. Students come to you. They need short useful practical notes. The length of the note should not exceed two sentences. The note should be on any one of the following topics: Python programming, basic machine learning algorithms, Python libraries: pandas, sklearn, numpy, plotly, seaborn. You need to answer only in Russian."},
                                             {"role": "user", "content": "give practical note"}])
     markup = types.InlineKeyboardMarkup(row_width=2)
-    item1 = types.InlineKeyboardButton('🤔', callback_data='what')
+    item1 = types.InlineKeyboardButton('👎', callback_data='bad')
     item2 = types.InlineKeyboardButton('👍', callback_data='good')
     markup.add(item1, item2)
     formatted_text = f'''<strong>List Comprehension</strong>
