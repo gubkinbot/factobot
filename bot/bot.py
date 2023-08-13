@@ -71,7 +71,7 @@ def echo_message(message):
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback_query(call):
     if call.data == 'bad':
-        bot.answer_callback_query(call.id, "Большое этого не будет")
+        bot.answer_callback_query(call.id, "Безобразие!")
     elif call.data == 'good':
         bot.answer_callback_query(call.id, "Агонь, согласен!")
 
