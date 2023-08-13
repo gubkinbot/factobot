@@ -39,9 +39,9 @@ def send_welcome(message):
         pd.DataFrame(columns=['user_id', 'action'], data=[[message.chat.id, 'reg']]).to_sql(name='log', con=engine, if_exists='append', index=False)
     response = f'''<b>Добро пожаловать в @factobot!</b>
 
-Здесь собраны все короткие заметки студентов IT-академии Uzum по направлению анализ данных и машинное обучение.
+Здесь собраны все короткие заметки студентов IT-академии Uzum по направлениям анализа данных и машинного обучения.
 
-Заносите свои заметки через factobot.uz, используя ваши личные учетные данные:
+Заносите свои заметки через factobot.uz, используя личные учетные данные:
 Логин: <pre>{message.chat.id}</pre>
 Пароль: <pre>{password}</pre>
 
